@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Generate the 1D Mesh - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tuto_2.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="tuto_2_2.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_2_4.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Tutorial 2</h2>
+
+<h3>Generate the 1D Mesh &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><a href="#create">Create a Void Mesh</a></li>
+<li><a href="#chord">Mesh the Wing Chord </a></li>
+<li><a href="#vl">Mesh the Viscous Layers </a></li>
+<li><a href="#rest">Mesh the Resting Edge Groups </a></li>
+</ul>
+
+</div>
+
+<h4 id="create">Create a Void Mesh &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Load the Mesh module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/mesh-icon.png"/> in the toolbar</strong></p>
+
+<li>Create a void mesh on the blocking.</li>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>Mesh &gt; Create Mesh</strong> &#8594; <strong>Apply and Close</strong></p>
+
+</ol>
+<h4 id="chord">Mesh the Wing Chord &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Create an edge group containing the upper wing root edge and call it "chord_source".</li>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/edge_group-icon.png"/> icon</strong> &#8594; <strong>Set the "Name" to "chord_source"</strong> &#8594;</p>
+<p><strong>Select the edge called "chord_source" in the following picture</strong> &#8594; <strong>Click on "Add"</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_2_2_1.png"/></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Create an edge group containing the upper wing root offset edge and call it "chord_target".</li>
+
+<li>Create an edge group containing the three resting upper and lower offset edges and call it "chord_out".</li>
+
+<li>Create an edge group containing the five resting wing edges and offset edges and call it "chord_in".</li>
+
+<li>Show only the newly created edge groups.</li>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<li>Set random colors on these groups.</li>
+<p><strong>Select all "chord_*" groups</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">SetRandomColors( )</p>
+<p><strong>or:</strong></p>
+<p class="code">src( )</p>
+
+<li>Set a line width of 3 on these groups.</li>
+<p><strong>Select all "chord_*" groups</strong> &#8594; <strong>Right-click in the 3D window &gt; Line Width &gt; Edge Width</strong> &#8594;</p>
+<p><strong>Set "Line width" to 3</strong> &#8594;  <strong>Ok</strong></p>
+
+<li>Compare what you can see with the previous picture.</li>
+
+<li>Load the Mesh module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/mesh-icon.png"/> in the toolbar</strong></p>
+
+<li>Mesh the group "chord_source" with a "Nb. Segments" hypothesis.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594; <strong>Select "chord_source"</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "Wire Discretisation"</strong> &#8594;</p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; Nb. Segments</strong> &#8594;</p>
+<p><strong>Set "Number of Segments" to 50</strong> &#8594;</p>
+<p><strong>Set "Type of distribution" to "Distribution with table density"</strong> &#8594;</p>
+<p><strong>Use the following density table</strong> &#8594;</p>
+<table class="arguments">
+	<tr>
+		<th></th> <th>t</th> <th>f(t)</th>
+	</tr>
+	<tr>
+		<th>1</th> <td>0</td> <td>5</td>
+	</tr>
+	<tr>
+		<th>2</th> <td>0.02</td> <td>1.3</td>
+	</tr>
+	<tr>
+		<th>3</th> <td>0.2</td> <td>1</td>
+	</tr>
+	<tr>
+		<th>4</th> <td>1</td> <td>1</td>
+	</tr>
+</table>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<li>Display the sub-mesh nodes only.</li>
+<p><strong>Select "Sub-mesh_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+<p><strong>Select "Sub-mesh_1"</strong> &#8594; <strong>Right-click in the 3D window &gt; Display Mode &gt; Nodes</strong></p>
+
+<li>Zoom on the mesh.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/top-icon.png"/> in the 3D window toolbar</strong></p>
+
+<li>Hide the trihedron.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/trihedron-icon.png"/> in the 3D window toolbar</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_2_2.png"/></p>
+
+<li>Project orthogonally meshed nodes on the "chord_target" group.</li>
+<p><strong>Select the "chord_target" group + "Sub-mesh_1" together</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">ProjectEdgeSubmesh( )</p>
+<p><strong>or:</strong></p>
+<p class="code">pes( )</p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<li>Display the new sub-mesh nodes.</li>
+<p><strong>Select sub-mesh called "chord_target"</strong> &#8594; <strong>Right-click &gt; Show</strong></p>
+<p><strong>Select sub-mesh called "chord_target"</strong> &#8594; <strong>Right-click in the 3D window &gt; Display Mode &gt; Nodes</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_2_3.png"/></p>
+
+<li>Project the "chord_target" sub-mesh parameters on the "chord_out" group.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594; <strong>Select "chord_out"</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "Projection 1D"</strong> &#8594;</p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; Source Edge</strong> &#8594;</p>
+<p><strong>Set "Source Edge" to "chord_target" </strong> &#8594;</p>
+<p><strong>Set "Source Mesh" to "Mesh_1" </strong> &#8594;</p>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Project the "chord_source" sub-mesh parameters on the "chord_in" group.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594; <strong>Select "chord_in"</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "Projection 1D"</strong> &#8594;</p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; Source Edge</strong> &#8594;</p>
+<p><strong>Set "Source Edge" to "chord_source"</strong> &#8594;</p>
+<p><strong>Set "Source Mesh" to "Mesh_1"</strong> &#8594;</p>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<li>Show only the mesh nodes.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Right-click in the 3D window &gt; Display Mode &gt; Nodes</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_2_4.png"/></p>
+
+</ol>
+<h4 id="vl">Mesh the Viscous Layers &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Generate blocking parallel edge groups.</li>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>Operations &gt; Blocks &gt; Propagate</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Put all viscous layer edge groups into a single one.</li>
+<p><strong>Select the edge groups visible in the following picture</strong> &#8594; </p>
+<p><img alt="picture" src="../pictures/tuto_2_2_5.png"/></p>
+<p><strong>New Entity &gt; Group &gt; Union Groups</strong> &#8594; <strong>Set "Name" to "vl"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Hide all in the 3D window.</li>
+<strong>Right-click in the 3D window &gt; Hide All</strong></p>
+
+<li>Create an edge group containing the far viscous layer edges.</li>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/edge_group-icon.png"/> icon</strong> &#8594; <strong>Set the "Name" to "vl_far"</strong> &#8594;</p>
+<p><strong>Select the "vl" group</strong> &#8594; <strong>Click on "Add"</strong> &#8594;</p>
+<p><strong>Select the edges visible in the following picture</strong> &#8594; <strong>Click on "Remove"</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_2_2_6.png"/></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Remove the far viscous layer edges from the "vl" group.</li>
+<p><strong>Select the "vl" group</strong> &#8594; <strong>New Entity &gt; Group &gt; Edit Group</strong> &#8594;</p>
+<p><strong>Select the "vl_far" group</strong> &#8594; <strong>Click on "Remove"</strong> &#8594;</p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Load the Mesh module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/mesh-icon.png"/> in the toolbar</strong></p>
+
+<li>Get the suitable parameters for a viscous layer of 0.05cm having a wall thickness of 1mm and a ratio of 1.2.</li>
+<strong>Type in the Python console:</strong></p>
+<p class="code">ViscousLayerScaleFactor( 0.05, 1e-3, 1.2 )</p>
+<p><strong>or:</strong></p>
+<p class="code">vlsf( 0.05, 1e-3, 1.2 )</p>
+
+<li>Mesh the "vl" layer edge groups.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594; <strong>Select "vl"</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "Wire Discretisation"</strong> &#8594;</p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; Nb. Segments</strong> &#8594;</p>
+<p><strong>Set "Number of Segments" to 14</strong> &#8594;</p>
+<p><strong>Set "Type of distribution" to "Scale distribution"</strong> &#8594;</p>
+<p><strong>Set "Scale Factor" to 10</strong> &#8594;</p>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Mesh the "vl_far" layer edge groups with a uniform cell size.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594; <strong>Select "vl_far"</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "Wire Discretisation"</strong> &#8594;</p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; Nb. Segments</strong> &#8594;</p>
+<p><strong>Set "Number of Segments" to 14</strong> &#8594;</p>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_2_7.png"/></p>
+
+</ol>
+<h4 id="rest">Mesh the Resting Edge Groups &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Show only the edge groups.</li>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<li>Rename the following edge groups with the names indicated in the following pictures (using <strong>[F2]</strong>).</li>
+<p><img alt="picture" src="../pictures/tuto_2_2_8.png"/></p>
+
+<li>Load the Mesh module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/mesh-icon.png"/> in the toolbar</strong></p>
+
+<li>Create the following sub-meshes, using "Nb. Segments" hypotheses.</li>
+<table class="arguments">
+	<tr>
+		<th>Edge Group</th> <th>Number of Segments</th> <th>Type of distribution</th> <th>Scale</th>
+	</tr>
+	<tr>
+		<td>span</td> <td>50</td> <td>Scale distribution</td> <td>10</td>
+	</tr>
+	<tr>
+		<td>ext</td> <td>40</td> <td>Scale distribution</td> <td>3</td>
+	</tr>
+	<tr>
+		<td>corners</td> <td>10</td> <td>Equidistant distribution</td> <td></td>
+	</tr>
+	<tr>
+		<td>trail</td> <td>6</td> <td>Equidistant distribution</td> <td></td>
+	</tr>
+</table>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_2_9.png"/></p>
+
+</ol>
+
+<p><a href="tuto_2_4.html">NEXT STEP</a></p>
+
+<p><a href="tuto_2_2.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_2_4.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tuto_2.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

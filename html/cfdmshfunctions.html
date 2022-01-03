@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Cfdmsh Functions - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="commonarguments.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="basicinformation.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Cfdmsh Functions</h2>
+
+<p>Here are all the cfdmsh functions.</p>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><strong><a href="#internal">Internal Functions</a></strong></li>
+
+<li><strong><a href="#geometry">Geometry Module</a></strong><br/>&nbsp;
+<ul>
+<li><strong><a href="#measure">Measurement</a></strong></li>
+<li><strong><a href="#repair">Repair</a></strong></li>
+<li><strong><a href="#basic">Basic Geometry Generation</a></strong></li>
+<li><strong><a href="#vl_geom">Viscous Layer Generation</a></strong></li>
+<li><strong><a href="#group">Group Management</a></strong></li>
+<li><strong><a href="#render">Rendering</a></strong></li>
+<li><strong><a href="#csv">Import/Export</a></strong></li>
+</ul>
+</li>
+
+<li><strong><a href="#multi">Geometry + Mesh Module</a></strong><br/>&nbsp;
+<ul>
+<li><strong><a href="#vl_mixed">Viscous Layer Meshing</a></strong></li>
+<li><strong><a href="#netgen">Netgen Refinement</a></strong></li>
+<li><strong><a href="#mesh_rep">Mesh Repair</a></strong></li>
+<li><strong><a href="#convert">Mesh to Geometry Conversion</a></strong></li>
+<li><strong><a href="#param">Parametric Meshing</a></strong>
+</ul>
+</li>
+
+<li><strong><a href="#mesh">Mesh Module</a></strong><br/>&nbsp;
+<ul>
+<li><strong><a href="#vl_mesh">Viscous Layer Meshing</a></strong></li>
+<li><strong><a href="#config">Mesh Management</a></strong></li>
+<li><strong><a href="#hypo">Hypothesis Management</a></strong></li>
+<li><strong><a href="#export">Mesh Export</a></strong></li>
+</ul>
+</li>
+
+</ul>
+
+</div>
+
+<h3 id="internal">Internal Functions &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<ul>
+<li><a href="listcomponentshapes.html">List Component Shapes</a></li>
+<li><a href="checkobjectexistence.html">Check Object Existence</a></li>
+<li><a href="getnextnameindex.html">Get Next Name Index</a></li>
+<li><a href="addtostudy.html">Add To Study</a></li>
+<li><a href="getobject.html">Get Object</a></li>
+<li><a href="getsubshapes.html">Get Sub Shapes</a></li>
+<li><a href="getguiselection.html">Get GUI Selection</a></li>
+<li><a href="printdefinedfunctions.html">Print Defined Functions</a></li>
+<li><a href="printversion.html">Print Version</a></li>
+</ul>
+
+<h3 id="geometry">Geometry Module &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<h4 id="measure">Measurement &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<h5>Edges &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="getboundaryvertexes.html">Get Boundary Vertexes</a></li>
+<li><a href="getreorderededges.html">Get Reordered Edges</a></li>
+</ul>
+
+<h5>Vectors &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="getnormalizedvector.html">Get Normalized Vector</a></li>
+<li><a href="getcrossproduct.html">Get Cross Product</a></li>
+<li><a href="getdotproduct.html">Get Dot Product</a></li>
+<li><a href="getturnangle.html">Get Turn Angle</a></li>
+</ul>
+
+<h5>Any Shape &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="geometricalequality.html">Geometrical Equality</a></li>
+<li><a href="getboundaryfaces.html">Get Boundary Faces</a></li>
+<li><a href="gettriedgefaces.html">Get Tri Edge Faces</a>
+</ul>
+
+<h4 id="repair">Repair &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<h5>Splines or Edges &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="rebuildspline.html">Rebuild Spline</a></li>
+<li><a href="splitedge.html">Split Edge</a></li>
+<li><a href="discretizeedgebycurvature.html">Discretize Edge By Curvature</a></li>
+<li><a href="fusesplines.html">Fuse Splines</a></li>
+<li><a href="extendspline.html">Extend Spline</a></li>
+<li><a href="extendsplinestointersection.html">Extend Splines To Intersection</a>
+</ul>
+
+<h5>Spline Sets &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="fusesplinesets.html">Fuse Spline Sets</a></li>
+<li><a href="unrefinesplineset.html">Unrefine Spline Set</a></li>
+<li><a href="switchsplineset.html">Switch Spline Set</a>
+</ul>
+
+<h5>Faces &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="rebuildface.html">Rebuild Face</a></li>
+<li><a href="fusecoplanarfaces.html">Fuse Coplanar Faces</a></li>
+<li><a href="fuseshellfaces.html">Fuse Shell Faces</a></li>
+<li><a href="fusegroupfaces.html">Fuse Group Faces</a></li>
+<li><a href="removefaceextraedges.html">Remove Face Extra Edges</a>
+</ul>
+
+<h5>Foils &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="makefoiltrailingfillet.html">Make Foil Trailing Fillet</a>
+</ul>
+
+<h4 id="basic">Basic Geometry Generation &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<h5>Splines &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="makemiddlespline.html">Make Middle Spline</a></li>
+<li><a href="makecurvefromunsortedvertexes.html">Make Curve From Unsorted Vertexes</a>
+</ul>
+
+<h5>Faces &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="makeellipticalfilling.html">Make Elliptical Filling</a></li>
+<li><a href="makefillingfromunsortededges.html">Make Filling From Unsorted Edges</a>
+</ul>
+
+<h5>Foils &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="makefoilfromunsortedvertexes.html">Make Foil From Unsorted Vertexes</a>
+</ul>
+
+<h4 id="vl_geom">Viscous Layer Generation &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<h5>2D &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="makeedgeoffset.html">Make Edge Offset</a></li>
+<li><a href="makeplanarwireoffset.html">Make Planar Wire Offset</a></li>
+<li><a href="extendviscouslayer.html">Extend Viscous Layer</a></li>
+<li><a href="closeviscouslayer.html">Close Viscous Layer</a></li>
+<li><a href="propagateviscouslayerintersection.html">Propagate Viscous Layer Intersection</a>
+</ul>
+
+<h5>3D &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="maketipviscouslayer.html">Make Tip Viscous Layer</a></li>
+<li><a href="extendtipviscouslayer.html">Extend Tip Viscous Layer</a></li>
+<li><a href="closetipviscouslayer.html">Close Tip Viscous Layer</a></li>
+<li><a href="makelinkingsolids.html">Make Linking Solids</a>
+</ul>
+
+<h4 id="group">Group Management &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="copygeometricalgroups.html">Copy Geometrical Groups</a></li>
+<li><a href="exportgeometricalgroups.html">Export Geometrical Groups</a></li>
+<li><a href="importgeometricalgroups.html">Import Geometrical Groups</a></li>
+<li><a href="putallsubshapesinagroup.html">Put All Sub Shapes In A Group</a>
+</ul>
+
+<h4 id="render">Rendering &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="setrandomcolors.html">Set Random Colors</a>
+</ul>
+
+<h4 id="csv">Import/Export &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="exportcsvfile.html">Export CSV File</a></li>
+<li><a href="importcsvfile.html">Import CSV File</a>
+</ul>
+
+<h3 id="multi">Geometry + Mesh modules &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<h4 id="vl_mixed">Viscous Layer Meshing &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="makevirtualoffsetedgesubmesh.html">Make Virtual Offset Edge Submesh</a></li>
+<li><a href="maketriedgefacesubmeshes.html">Make Tri Edge Face Submeshes</a></li>
+<li><a href="projectedgesubmesh.html">Project Edge Submesh</a>
+</ul>
+
+<h4 id="netgen">Netgen Refinement &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="makenetgenrefinement.html">Make Netgen Refinement</a></li>
+<li><a href="setnetgenrefinement.html">Set Netgen Refinement</a></li>
+<li><a href="clearnetgenrefinement.html">Clear Netgen Refinement</a>
+</ul>
+
+<h4 id="mesh_rep">Mesh Repair &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="projectmeshgrouponface.html">Project Mesh Group On Face</a>
+</ul>
+
+<h4 id="convert">Mesh to Geometry Conversion &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="makevertexesfrommeshgroup.html">Make Vertexes From Mesh Group</a>
+</ul>
+
+<h4 id="param">Parametric Meshing &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="rotateflapgenerateandexportmeshinamshformat.html">Rotate Flap Generate And Export Mesh In Amsh Format</a>
+</ul>
+
+<h3 id="mesh">Mesh Module &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<h4 id="vl_mesh">Viscous Layer Meshing &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="viscouslayerscalefactor.html">Viscous Layer Scale Factor</a>
+</ul>
+
+
+<h4 id="config">Mesh Management &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="exportmeshconfiguration.html">Export Mesh Configuration</a></li>
+<li><a href="importmeshconfiguration.html">Import Mesh Configuration</a>
+</ul>
+
+<h4 id="hypo">Hypothesis Management &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="exporthypotheses.html">Export Hypotheses</a></li>
+<li><a href="importhypotheses.html">Import Hypotheses</a>
+</ul>
+
+
+<h4 id="export">Mesh Export &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="exportamshfile.html">Export Amsh File</a></li>
+<li><a href="exportsu2file.html">Export SU2 File</a>
+</ul>
+
+<p><a href="commonarguments.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="basicinformation.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

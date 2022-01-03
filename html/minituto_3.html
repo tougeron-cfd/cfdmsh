@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Mini-Tutorial 3 - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tutorials.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="minituto_2.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="minituto_1.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Mini-Tutorial 3</h2>
+
+<p><img alt="picture" class="shadow" src="../pictures/mini_3.png"/></p>
+
+<p>The purpose of this tutorial is to show how to create a Netgen refinement in Salome without using sub-shapes 
+of the meshed object but using instead a distinct volume.</p>
+
+<p>The following cfdmsh functions will be used:</p>
+
+<ul>
+	<li><a href="makenetgenrefinement.html">MakeNetgenRefinement</a></li>
+	<li><a href="clearnetgenrefinement.html">ClearNetgenRefinement</a></li>
+	<li><a href="setnetgenrefinement.html">SetNetgenRefinement</a></li>
+</ul>
+
+<p><strong>NB:</strong> This tutorial was tested on Salome 7.7.1 on Linux with the following settings:</p>
+<p><strong>File &gt; Preferences... &gt; Geometry &gt; Default display mode &gt; Wireframe</strong>.</p>
+<p><strong>File &gt; Preferences... &gt; Geometry &gt; Hide input objects from viewer &gt; OFF</strong>.</p>
+
+<div class="content">
+
+<p>Content of this mini-tutorial:</p>
+
+<ul>
+<li><strong><a href="#open">Open a New Study</a></strong></li>
+<li><strong><a href="#geometry">Create the Geometry</a></strong></li>
+<li><strong><a href="#mesh">Create the Mesh</a></strong></li>
+<li><strong><a href="#netgen">Create the Netgen Refinement</a></strong></li>
+<li><strong><a href="#modif">Modify the Netgen Refinement</a></strong></li>
+</ul>
+
+</div>
+
+<h4 id="open">Open a New Study &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Open Salome.</li>
+
+<li>Open a new study.</li>
+<p><strong>File &gt; New</strong></p>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Expand the Geometry node in the study tree.</li>
+<p><img alt="picture" src="../pictures/tuto_1_1_1.png"/></p>
+
+<li>Load the cfdmsh library.</li>
+<p><strong>[Ctrl] + [T]</strong> &#8594; <strong>Select the "cfdmsh.py" file on your computer</strong></p>
+
+</ol>
+<h4 id="geometry">Create the Geometry &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a cube.</li>
+<p><strong>New Entity &gt; Primitives &gt; Box</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Create a sphere.</li>
+<p><strong>New Entity &gt; Primitives &gt; Sphere</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Hide the trihedron.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/trihedron-icon.png"/> in the 3D window toolbar</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_3_1.png"/></p>
+
+</ol>
+<h4 id="mesh">Create the Mesh &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Load the Mesh module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/mesh-icon.png"/> in the toolbar</strong></p>
+
+<li>Create a volume mesh on the cube, using Netgen and letting default settings.</li>
+<p><strong>Select "Box_1"</strong> &#8594; <strong>Mesh &gt; Create Mesh</strong> &#8594; </p>
+<p><strong>Set "Algorithm" to "Netgen 1D-2D-3D"</strong> &#8594; </p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; NETGEN 3D Parameters</strong> &#8594;</p>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_3_2.png"/></p>
+
+</ol>
+<h4 id="netgen">Create the Netgen Refinement &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Expand the "Hypotheses" node in the study tree.</li>
+<p><img alt="picture" src="../pictures/mini_3_3.png"/></p>
+
+<li>Simulate the creation of a Netgen refinement on the visible hypothesis ("NETGEN 3D Parameters_1") inside the sphere,
+setting a max cell size of 5m.</li>
+<p><strong>Select both "NETGEN 3D Parameters_1" and the sphere ("Sphere_1")</strong> &#8594;</p>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">MakeNetgenRefinement( 5, test = 1 )</p>
+<p><strong>or:</strong></p>
+<p class="code">mnr( 5, test = 1 )</p>
+
+<p><img alt="picture" src = "../pictures/mini_3_4.png"/></p>
+
+<p>The number of refinement edges to create depends of the size of the refinement area and the desired cell size inside the refined area.
+This number should be always kept relatively low to ensure a good responsiveness of the Geometry module.</p>
+
+<li>Create the Netgen refinement.</li>
+<p><strong>Select both "NETGEN 3D Parameters_1" and the sphere ("Sphere_1")</strong> &#8594;</p>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">MakeNetgenRefinement( 5 )</p>
+<p><strong>or:</strong></p>
+<p class="code">mnr( 5 )</p>
+
+<p>This command created a set of distinct parallel edges on which were applied
+local cell size inside the "NETGEN 3D Parameters" hypothesis.</p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_3_5.png"/></p>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Show the Netgen refinement edges.</li>
+<p><strong>Select "RefinementEdges_1"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<li>Show the Sphere.</li>
+<p><strong>Select "Sphere_1"</strong> &#8594; <strong>Right-click &gt; Show</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_3_6.png"/></p>
+
+</ol>
+<h4 id="modif">Modify the Netgen Refinement &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<p>A bigger refinement cell size can be defined without creating a new edge set.</p>
+
+<li>Load the Mesh module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/mesh-icon.png"/> in the toolbar</strong></p>
+
+<li>Clear the Netgen refinement on the "NETGEN 3D Parameters_1" hypothesis.</li>
+<p><strong>Select "NETGEN 3D Parameters_1"</strong> &#8594;</p>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">ClearNetgenRefinement( )</p>
+<p><strong>or:</strong></p>
+<p class="code">cnr( )</p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_3_7.png"/></p>
+
+<li>Set a max cell size of 10m in the existing Netgen refinement.</li>
+<p><strong>Select both "NETGEN 3D Parameters_1" and "RefinementEdges_1"</strong> &#8594;</p>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">SetNetgenRefinement( 10 )</p>
+<p><strong>or:</strong></p>
+<p class="code">snr( 10 )</p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_3_8.png"/></p>
+
+<p>You can close this study.</p>
+
+</ol>
+
+<p>END OF THIS TUTORIAL</p>
+
+<p><a href="minituto_2.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="minituto_1.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tutorials.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

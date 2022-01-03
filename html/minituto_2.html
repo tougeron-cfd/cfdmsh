@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Mini-Tutorial 2 - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tutorials.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="minituto_1.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="minituto_3.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Mini-Tutorial 2</h2>
+
+<p><img alt="picture" class="shadow" src="../pictures/mini_2.png"/></p>
+
+<p>The purpose of this tutorial is to show how to export/import mesh hypotheses and configurations 
+using cfdmsh.</p>
+
+<p>The following cfdmsh functions will be used:</p>
+
+<ul>
+	<li><a href="exportmeshconfiguration.html">ExportMeshConfiguration</a></li>
+	<li><a href="importmeshconfiguration.html">ImportMeshConfiguration</a></li>
+	<li><a href="exporthypotheses.html">ExportHypotheses</a></li>
+	<li><a href="importhypotheses.html">ImportHypotheses</a></li>
+</ul>
+
+<p><strong>NB:</strong> This tutorial was tested on Salome 7.7.1 on Linux with the following settings:</p>
+<p><strong>File &gt; Preferences... &gt; Geometry &gt; Default display mode &gt; Wireframe</strong>.</p>
+<p><strong>File &gt; Preferences... &gt; Geometry &gt; Hide input objects from viewer &gt; OFF</strong>.</p>
+
+<div class="content">
+
+<p>Content of this mini-tutorial:</p>
+
+<ul>
+<li><strong><a href="#open">Open a New Study</a></strong></li>
+<li><strong><a href="#source">Create the Source Cube and Groups</a></strong></li>
+<li><strong><a href="#target">Create the Target Cube and Groups</a></strong></li>
+<li><strong><a href="#mesh">Create a Mesh on the Source Cube</a></strong></li>
+<li><strong><a href="#config">Import/Export the Mesh Configuration</a></strong></li>
+<li><strong><a href="#hypo">Import/Export the Mesh Hypotheses</a></strong></li>
+</ul>
+
+</div>
+
+<h4 id="open">Open a New Study &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Open Salome.</li>
+
+<li>Open a new study.</li>
+<p><strong>File &gt; New</strong></p>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Expand the Geometry node in the study tree.</li>
+<p><img alt="picture" src="../pictures/tuto_1_1_1.png"/></p>
+
+<li>Load the cfdmsh library.</li>
+<p><strong>[Ctrl] + [T]</strong> &#8594; <strong>Select the "cfdmsh.py" file on your computer</strong></p>
+
+</ol>
+<h4 id="source">Create the Source Cube and Groups &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a cube.</li>
+<p><strong>New Entity &gt; Primitives &gt; Box</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Hide the trihedron.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/trihedron-icon.png"/> in the 3D window toolbar</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_1_1.png"/></p>
+
+<li>Put an arbitrary sub-face in a group called "refined".</li>
+<p><strong>Select "box_1"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/face_group-icon.png"/> icon</strong> &#8594; <strong>Set the "Name" to "refined"</strong> &#8594;</p>
+<p><strong>Select an arbitrary face like in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/mini_2_1.png"/></p>
+<p><strong>Click on "Add"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Put another arbitrary sub-face in a group called "inlet".</li>
+<p><strong>Select "box_1"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/face_group-icon.png"/> icon</strong> &#8594; <strong>Set the "Name" to "inlet"</strong> &#8594;</p>
+<p><strong>Select an arbitrary face like in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/mini_2_2.png"/></p>
+<p><strong>Click on "Add"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+</ol>
+<h4 id="target">Create the Target Cube and Groups &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a cube having the following X, Y and Z dimensions: 400m, 150m and 100m.</li>
+<p><strong>New Entity &gt; Primitives &gt; Box</strong> &#8594;</p>
+<p><strong>Set respectively "Dx", "Dy" and "Dz" to 400, 150 and 100</strong> &#8594;</p>
+<p><strong>Apply and Close</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_2_3.png"/></p>
+
+<li>Show only the target cube.</li>
+<p><strong>Select "Box_2"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<li>Put an arbitrary sub-face in a group called "refined".</li>
+<p><strong>Select "box_1"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/face_group-icon.png"/> icon</strong> &#8594; <strong>Set the "Name" to "refined"</strong> &#8594;</p>
+<p><strong>Select an arbitrary face like in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/mini_2_4.png"/></p>
+<p><strong>Click on "Add"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Put another arbitrary sub-face in a group called "inlet".</li>
+<p><strong>Select "box_1"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/face_group-icon.png"/> icon</strong> &#8594; <strong>Set the "Name" to "inlet"</strong> &#8594;</p>
+<p><strong>Select an arbitrary face like in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/mini_2_5.png"/></p>
+<p><strong>Click on "Add"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+</ol>
+<h4 id="mesh">Create a Mesh on the Source Cube &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Load the Mesh module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/mesh-icon.png"/> in the toolbar</strong></p>
+
+<li>Create a volume mesh on the source cube, using Netgen and letting default settings.</li>
+<p><strong>Select "Box_1"</strong> &#8594; <strong>Mesh &gt; Create Mesh</strong> &#8594; </p>
+<p><strong>Set "Algorithm" to "Netgen 1D-2D-3D"</strong> &#8594; </p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; NETGEN 3D Parameters</strong> &#8594;</p>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Create a sub-mesh on the group called "refined" having a max cell size of 10m.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594;</p>
+<p><strong>Select "refined" in the source cube ("Box_1")</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "Netgen 1D-2D"</strong> &#8594; </p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; NETGEN 2D Parameters</strong> &#8594;</p>
+<p><strong>Set "Max. Size" to 10</strong> &#8594; <strong>OK</strong> &#8594; </p>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<li>Create a mesh group from the geometrical group "inlet".</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Groups from Geometry</strong> &#8594;</p>
+<p><strong>Select "inlet" in the source cube ("Box_1")</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show the mesh group.</li>
+<p><strong>Select "inlet" inside "Mesh_1" &gt; "Groups of Faces"</strong> &#8594; <strong>Right-click &gt; Show</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_2_6.png"/></p>
+
+</ol>
+<h4 id="config">Import/Export the Mesh Configuration &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a void mesh on the target cube.</li>
+<p><strong>Select "Box_2"</strong> &#8594; <strong>Mesh &gt; Create Mesh</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Expand the "Hypotheses" node in the study tree.</li>
+<p><img alt="picture" src="../pictures/mini_2_8.png"/></p>
+
+<p>Here are hypotheses used in "Mesh_1".
+We want now to use them in a new mesh associated to the "Box_2".</p>
+
+<li>Hide everything in the 3D window</li>
+<p><strong>Right-click in the 3D window &gt; Hide All</strong></p>
+
+<li>Export the mesh configuration into a file.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>In the Python console, type:</strong></p>
+<p class="code">ExportMeshConfiguration( )</p>
+<p><strong>or:</strong></p>
+<p class="code">emc( )</p>
+
+<p>This command created a file called "cfdmsh_msh" in your home folder.</p>
+
+<li>Import the mesh configuration in the target mesh.</li>
+<p><strong>Select "Mesh_2"</strong> &#8594; <strong>In the Python console, type:</strong></p>
+<p class="code">ImportMeshConfiguration( )</p>
+<p><strong>or:</strong></p>
+<p class="code">imc( )</p>
+
+<li>Compute the target mesh.</li>
+<p><strong>Select "Mesh_2"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<li>Show the target "inlet" mesh group.</li>
+<p><strong>Select "inlet" inside "Mesh_2" &gt; "Groups of Faces"</strong> &#8594; <strong>Right-click &gt; Show</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_2_7.png"/></p>
+
+<p>The mesh configuration, including hypothesis names, sub-meshes and groups from geometry, was well copied from the source mesh to the target mesh.</p>
+
+</ol>
+<h4 id="hypo">Import/Export the Mesh Hypotheses &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Export all hypotheses into a file.</li>
+<p><strong>Select both "NETGEN 3D Parameters_1" and NETGEN 2D Parameters_1" hypotheses</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/mini_2_9-2.png"/></p>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">ExportHypotheses( )</p>
+<p><strong>or:</strong></p>
+<p class="code">eh( )</p>
+
+<li>Go to your home folder and open the file "cfdmsh_hyps" with your favorite text editor.</li>
+
+<li>At the bottom of the file, modify the value of "QUADALLOWED" from "False" to "True".</li>
+<p><img alt="picture" src = "../pictures/mini_2_9.png"/></p>
+
+<li>Save the modifications and close your "cfdmsh_hyps" file.</li>
+
+<li>In Salome, unassign all hypotheses and delete them.</li>
+<p><strong>Select both "NETGEN 3D Parameters_1" and NETGEN 2D Parameters_1" hypotheses</strong> &#8594;</p>
+<p><strong>Right-click &gt; Unassign</strong></p>
+<p><strong>Select both "NETGEN 3D Parameters_1" and NETGEN 2D Parameters_1" hypotheses</strong> &#8594;</p>
+<p><strong>[Del]</strong> &#8594; <strong>Yes</strong></p>
+
+<li>Import the new mesh hypotheses from the modified "cfdmsh_hyps" file.</li>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">ImportHypotheses( )</p>
+<p><strong>or:</strong></p>
+<p class="code">ih( )</p>
+
+<li>Re-import the mesh configuration into the source mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>In the Python console, type:</strong></p>
+<p class="code">ImportMeshConfiguration( )</p>
+<p><strong>or:</strong></p>
+<p class="code">imc( )</p>
+
+<li>Compute the source mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<li>Show only this mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_2_10.png"/></p>
+
+<p>Quadrangles are now present in the refined sub-mesh.</p>
+
+<p>You can close this study.</p>
+
+</ol>
+
+<p>END OF THIS TUTORIAL</p>
+
+<p><a href="minituto_1.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="minituto_3.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tutorials.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

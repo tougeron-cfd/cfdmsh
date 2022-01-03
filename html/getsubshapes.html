@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			GetSubShapes - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="getobject.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="getguiselection.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>GetSubShapes</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Gets all sub-vertexes, sub-edges, sub-faces and sub-solids of a geometrical shape.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The function returns a list of lists, each one containing all sub-shapes of a given dimension.</p>
+<table class="arguments">
+	<tr>
+		<th>Variable</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>returned_list[0]</td>
+		<td><strong>List</strong> of 0D sub-shapes (vertexes)</strong></td>
+	</tr>
+	<tr>
+		<td>returned_list[1]</td>
+		<td><strong>List</strong> of 1D sub-shapes (edges)</strong></td>
+	</tr>
+	<tr>
+		<td>returned_list[2]</td>
+		<td><strong>List</strong> of 2D sub-shapes (faces)</strong></td>
+	</tr>
+	<tr>
+		<td>returned_list[3]</td>
+		<td><strong>List</strong> of 3D sub-shapes (volumes)</strong></td>
+	</tr>
+	<tr>
+		<td>returned_list[-1]</td>
+		<td><strong>The input shape itself</strong></td>
+	</tr>
+</table>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">def GetSubShapes(shape):</p>
+
+ 
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href = "use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href = "use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href = "use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>shape</em></td>
+<td>The shape from which to get sub shapes.</td>
+<td><strong>Any geometrical object</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href = "commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href = "commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>-</td>
+<td>-</td>
+<td><strong>Geometrical object</strong> or <strong>List</strong> of <strong>Geometrical objects</strong> (see the "Additional Information")</td>
+<td>5</td>
+<td>-</td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h3>
+
+
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+box = geompy.MakeBoxDXDYDZ(10, 10, 10)<br/>
+<br/>
+<em>box = GetSubShapes(box)</em><br/>
+<br/>
+AddToStudy(box[-1], "This is the input shape")<br/>
+AddToStudy(box[0], "Sub-Vertex")<br/>
+AddToStudy(box[1], "Sub-Edge")<br/>
+AddToStudy(box[2], "Sub-Face")<br/>
+</p>
+
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>-</p>
+
+<p><a href="getobject.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="getguiselection.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

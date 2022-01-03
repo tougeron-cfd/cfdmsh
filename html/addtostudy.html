@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			AddToStudy - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="getnextnameindex.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="getobject.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>AddToStudy</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Flexibly publishes an object in the study tree.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>This function tries to make the shape publication as simple as possible.</p>
+<p>Inputs can be single shapes or lists of shapes. Giving them a name for publication is mandatory. In addition, the <em>name</em> argument 
+can be something else than a string (eg. an integer or float).
+Also, the add of a suffix (eg. <em>"_1"</em>) at the end of the publication name is automatic.</p>
+<p>The publication is followed by the automatic display of the shape as well as the automatic refresh of the study tree.</p>
+
+<p>Each of automatic features can be separately disabled so as to speed up the publication
+of huge numbers of shapes.</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">def AddToStudy(object, name = "Geometrical Object", father = None, suffix = True, disp = True, refresh = True):</p>
+
+ 
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href = "use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href = "use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href = "use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>object</em></td>
+<td>The object to publish.</td>
+<td><strong>Any geometrical object</strong></td>
+<td>-</td>
+<td>-</td>
+<td>yes</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><em>name</em></td>
+<td>The name to give to the shape in the study tree.</td>
+<td><strong>String</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><em>"Geometrical Object"</em></td>
+</tr>
+
+<tr>
+<td><em>father</em></td>
+<td>The geometrical shape in which to add the published shape.</td>
+<td><strong>Any geometrical object</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>None</td>
+</tr>
+
+<tr>
+<td><em>suffix</em></td>
+<td>Determines if a suffix (eg. <em>"_1"</em>) as to be added to the name of the shape to publish.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>disp</em></td>
+<td>Determines if the shape has to be displayed in the 3D window after publication.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>refresh</em></td>
+<td>Determines if the study tree has to be refreshed after publication.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href = "commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href = "commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h3>
+
+
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+v_1 = geompy.MakeVertex(0, 0, 0)<br/>
+v_2 = geompy.MakeVertex(0, 1, 0)<br/>
+v_3 = geompy.MakeVertex(0, 0, 1)<br/>
+<br/>
+<em>AddToStudy([v_1, v_2])</em><br/>
+<em>AddToStudy(v_3, "Vertex")</em><br/>
+</p>
+
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>-</p>
+
+<p><a href="getnextnameindex.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="getobject.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

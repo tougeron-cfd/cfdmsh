@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			FuseGroupFaces - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="fuseshellfaces.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="removefaceextraedges.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>FuseGroupFaces</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Fuse faces inside a face group, be it in a solid or a shell.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>This function makes a <a href="fuseshellfaces.html">FuseShellFaces</a> operation of the input group, then uses untouched
+sub-shapes to rebuild its main shape.</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">def FuseGroupFaces( group = None, np = 400, add = True ):</p>
+
+ 
+
+<p><img alt="picture" src = "../pictures/fusegroupfaces_1.png"></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>group</em></td>
+<td>The face group to fuse.</td>
+<td><strong>Group</strong> of <strong>Faces</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>-</td>
+<td>[None]</td>
+</tr>
+
+<tr>
+<td><em>np</em></td>
+<td>See <a href="commonarguments.html#np">here</a>.<br/>
+In this case, the number of point is approximatively respected.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>400</td>
+</tr>
+
+<tr>
+<td><em>add</em></td>
+<td>See <a href="commonarguments.html#add">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>-</td>
+<td>-</td>
+<td><strong>Solid</strong> or <strong>Shell</strong></td>
+<td>1</td>
+<td><em>"SolidWithFusedGroup"</em> or <em>"ShellWithFusedGroup"</em></td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+divided_cylinder = geompy.MakeDividedCylinder(100, 300, GEOM.SQUARE)<br/>
+boundary_faces = GetBoundaryFaces(divided_cylinder)<br/>
+shell = geompy.MakeShell(boundary_faces)<br/>
+solid="geompy".MakeSolid(shell)<br/>
+AddToStudy(solid, "solid")<br/>
+<br/>
+group = geompy.CreateGroup(solid, geompy.ShapeType["FACE"])<br/>
+geompy.UnionIDs(group, [44, 61])<br/>
+AddToStudy(group, "group", father = solid)<br/>
+<br/>
+<em>solid_with_fused_group = FuseGroupFaces(group)</em><br/>
+</p>
+
+ 
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>-</p>
+
+<p><a href="fuseshellfaces.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="removefaceextraedges.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			SetNetgenRefinement - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="makenetgenrefinement.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="clearnetgenrefinement.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>SetNetgenRefinement</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Applies a new cell size on a Netgen refinement created thanks to the <a href="makenetgenrefinement.html">MakeNetgenRefinement</a> 
+function.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>-</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+
+
+<p class="code">def SetNetgenRefinement( size, hypo_and_compound = [None], clear = False ):</p>
+
+
+
+<p><img alt="picture" src = "../pictures/setnetgenrefinement_1.png"/></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>size</em></td>
+<td>The desired cell size in the refinement area.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><em>hypo_and_compound</em></td>
+<td>The refinement compound containing refinement edges (eg. "RefinementEdges_1") and the Netgen hypothesis.</td>
+<td><strong>List</strong> of<br/> 1 <strong>Mesh hypothesis</strong><br/> + 1 <strong>Compound</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>-</td>
+<td>[None]</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+box = geompy.MakeBoxDXDYDZ(200, 200, 200)<br/>
+sphere = geompy.MakeSphereR(50)<br/>
+sphere = geompy.MakeTranslation(sphere, 100, 0, 100)<br/>
+<br/>
+AddToStudy(box, "box")<br/>
+AddToStudy(sphere, "sphere")<br/>
+<br/>
+mesh = smesh.Mesh(box)<br/>
+algo = mesh.Tetrahedron(algo = smeshBuilder.NETGEN_1D2D3D)<br/>
+hypo = algo.Parameters()<br/>
+hypo.SetMaxSize(30)<br/>
+hypo.SetMinSize(25)<br/>
+<br/>
+compound = MakeNetgenRefinement(5, [sphere, hypo])<br/>
+<br/>
+<em>SetNetgenRefinement(10, [compound, hypo])</em><br/>
+mesh.Compute()<br/>
+</p>
+
+ 
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The new cell size should not be lower than the one used to create the Netgen refinement.</p>
+
+<p><a href="makenetgenrefinement.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="clearnetgenrefinement.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Rebuild Non-Coinciding Faces - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tuto_3.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="tuto_3_2.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_3_1.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Tutorial 3</h2>
+
+<h3>Rebuild Non-Coinciding Faces &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><a href="#open">Open a New Study</a></li>
+<li><a href="#import">Import the Geometry</a></li>
+<li><a href="#explode">Explode Sub-Faces</a></li>
+<li><a href="#sets">Create Spline Sets</a></li>
+<li><a href="#relimit">Relimit Spline Sets</a></li>
+<li><a href="#face">Build a New Face</a></li>
+<li><a href="#compare">Compare Geometries</a></li>
+</ul>
+
+</div>
+
+<h4 id="open">Open a New Study &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Open Salome.</li>
+
+<li>Open a new study.</li>
+<p><strong>File &gt; New</strong></p>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Expand the Geometry node in the study tree.</li>
+<p><img alt="picture" src="../pictures/tuto_1_1_1.png"/></p>
+
+<li>Load the cfdmsh library.</li>
+<p><strong>[Ctrl] + [T]</strong> &#8594; <strong>Select the "cfdmsh.py" file on your computer</strong></p>
+
+</ol>
+<h4 id="import">Import the Geometry &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Import the <em>a380-stabilizer.brep</em> file which is in your home folder.</li>
+<p><strong>File &gt; Import &gt; BREP</strong></p>
+
+<li>Zoom on the imported geometry.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/fit-icon.png"/> in the 3D window toolbar</strong></p>
+
+<li>Hide the trihedron.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/trihedron-icon.png"/> in the 3D window toolbar</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_3_2_1.png"/></p>
+
+</ol>
+<h4 id="explode">Explode Sub-Faces &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Explode both faces indicated in the following picture.</li>
+<p><strong>Select "a380-stabilizer.brep_1"</strong> &#8594; <strong>New Entity &gt; Explode</strong> &#8594;</p>
+<p><strong>Set "Sub-shapes Type" to "Face"</strong> &#8594; <strong>Activate the "Select Sub-shapes" option</strong> &#8594;</p>
+<p><strong>Select both faces colored in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_3_3_1.png"/></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Show only the exploded faces.</li>
+<p><strong>Select "a380-stabilizer.brep_1"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+</ol>
+<h4 id="sets">Create Spline Sets &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create spline sets on both visible face.</li>
+<p><strong>Select all visible faces</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">RebuildFace( dim = 1 )</p>
+<p><strong>or:</strong></p>
+<p class="code">rf( dim = 1 )</p>
+
+<li>Show only the spline sets.</li>
+<p><strong>Select both "RebuildFace (Edges)_*" shapes</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_3_3_2.png"/></p>
+
+<p>Spline sets can't be fused together because they are non-coinciding. Let's start a new strategy.</p>
+
+<li>Show again the exploded faces only.</li>
+<p><strong>Select "a380-stabilizer.brep_1"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<li>Create switched spline sets on both visible face.</li>
+<p><strong>Select all visible faces</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">RebuildFace( dim = 1 , <em>switch = 1</em> )</p>
+<p><strong>or:</strong></p>
+<p class="code">rf( dim = 1 , <em>switch = 1</em> )</p>
+
+<li>Unrefine three times the leading edge spline set.</li>
+<p><strong>Select the leading edge spline set (eg. "RebuiltFace (Edges)_3")</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">UnrefineSplineSet( )</p>
+<p><strong>or:</strong></p>
+<p class="code">uss( )</p>
+<p><strong>Repeat this operation on the last unrefined spline set ("UnrefinedSplineSet_x") until you get one whose name ends with "_3"</strong></p>
+
+<li>Hide leading edge spline sets other than the last unrefined one.</li>
+<p><strong>Select the suitable spline sets</strong> &#8594; <strong>Right-click &gt; Hide</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_3_3_3.png"/></p>
+
+</ol>
+<h4 id="relimit">Relimit Spline Sets &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Open a new 3D window.</li>
+<p><strong>Window &gt; New Window &gt; OCC 3D view</strong></p>
+
+<li>Explode sub-edges being at the root of the geometry.</li>
+<p><strong>Select "a380-stabilizer.brep_1"</strong> &#8594; <strong>New Entity &gt; Explode</strong> &#8594;</p>
+<p><strong>Set "Sub-shapes Type" to "Edge"</strong> &#8594; <strong>Activate the "Select Sub-shapes" option</strong> &#8594;</p>
+<p><strong>Select edges indicated in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_3_3_4.png"/></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Create vertex sets on each exploded edge.</li>
+<p><strong>Select the all visible edges</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">RebuildSpline( dim = 0 )</p>
+<p><strong>or:</strong></p>
+<p class="code">rs( dim = 0 )</p>
+
+<li>Put vertex sets in a compound, fusing coincident vertexes together.</li>
+<p><strong>Select the all "RebuiltSpline (Vertexes)_*"</strong> &#8594; <strong>Operations &gt; Partition</strong> &#8594;</p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Create a smooth face from vertexes.</li>
+<p><strong>Select the "Partition_1"</strong> &#8594; <strong>New Entity &gt; Advanced &gt; Smoothing Surface</strong> &#8594;</p>
+<p><strong>Apply and Close</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_3_3_5.png"/></p>
+
+<li>Increase the tolerance of the smooth surface up to 1e-4m.</li>
+<p><strong>Select "Smoothing surface_1"</strong> &#8594; <strong>Repair &gt; Limit tolerance</strong> &#8594;</p>
+<p><strong>Set "Tolerance" to 1e-4</strong> &#8594; <strong>Apply and Close</strong> &#8594; <strong>Ok</strong></p>
+
+<li>Switch back to the first 3D window.</li>
+<p><strong>Click on "OCC scene:1 - viewer:1"</strong></p>
+
+<li>Split both visible spline sets with the repaired smooth surface.</li>
+<p><strong>Select both visible spline sets</strong> &#8594; <strong>Operations &gt; Partition</strong> &#8594;</p>
+<p><strong>Set "Tool Objects" to "Limit_tolerance_1" </strong> &#8594;</p>
+<strong>Apply and Close</strong></p>
+
+<li>Explode all edges present in the partition.</li>
+<p><strong>Select "Partition_2"</strong> &#8594; <strong>New Entity &gt; Explode</strong> &#8594;</p>
+<p><strong>Set "Sub-shapes Type" to "Edge"</strong> &#8594; <strong>Apply and Close</strong>  &#8594; <strong>Explode</strong></p>
+
+<li>Show only the exploded edges.</li>
+<p><strong>Select "Partition_2"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<li>Delete all edges being at the root of the geometry (using <strong>[Del]</strong>).</li>
+<p><img alt="picture" src="../pictures/tuto_3_3_6.png"/></p>
+
+<li>Put all resting edges into a compound.</li>
+<p><strong>Select all visible edges</strong> &#8594; <strong>New Entity &gt; Build &gt; Compound</strong> &#8594;</p>
+<p><strong>Apply and Close</strong></p>
+
+</ol>
+<h4 id="face">Build a New Face &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Switch the direction of the spline set.</li>
+<p><strong>Select "Compound_1"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">SwitchSplineSet( )</p>
+<p><strong>or:</strong></p>
+<p class="code">sss( )</p>
+
+<li>Show only the switched spline set.</li>
+<p><strong>Select "SwitchedSplineSet_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<li>Create a vertex at a corner of this switched spline set.</li>
+<p><strong>New Entity &gt; Basic &gt; Point</strong> &#8594; <strong>Select the vertex visible in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_3_3_7.png"/></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Create a new face from this spline set, starting from the spline touching the newly created vertex.</li>
+<p><strong>Select both "SwitchedSplineSet_1" and "Vertex_1" together</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakeFillingFromUnsortedEdges( )</p>
+<p><strong>or:</strong></p>
+<p class="code">mffue( )</p>
+
+</ol>
+<h4 id="compare">Compare Geometries &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Show only the input geometry and the rebuild face ("FillingFromUnstortedEdges_1"), in shading mode and with different colors.</li>
+<p><strong>Select "a380-nose.brep_1" and "FillingFromUnstortedEdges_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+<p><strong>Select "a380-nose.brep_1" and "FillingFromUnstortedEdges_1"</strong> &#8594; <strong>Right-click in the 3D window &gt; Display Mode &gt; Shading</strong></p>
+<p><strong>Select "a380-nose.brep_1" and "FillingFromUnstortedEdges_1"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">SetRandomColors( )</p>
+<p><strong>or:</strong></p>
+<p class="code">src( )</p>
+
+<p><img alt="picture" src = "../pictures/tuto_3_3_8.png"/></p>
+
+<p>You can close this study.</p>
+
+</ol>
+
+<p>END OF THIS TUTORIAL</a></p>
+
+<p><a href="tuto_3_2.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_3_1.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tuto_3.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			ExportAmshFile - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="importhypotheses.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="exportsu2file.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>ExportAmshFile</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Exports a mesh into an .amsh file readable by the CFD solver 
+<a href="http://www.foi.se/en/Customer--Partners/Projects/Edge1/Edge/">Edge</a> 5.0.0.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The function writes in an .amsh file the node positions, the definition of the elements
+of all the mesh groups and the ones being inside the domain. It 
+also writes a human readable 'helpfile' giving the relationship between 
+the Salome numbering (after element and node reordering) 
+and the Edge numbering, so as to allow the user to find in Salome 
+cells on which Edge encounters problems during the "preprocessor" command execution.
+</p>
+
+<p>The files appear by default in the home folder.</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">def ExportAmshFile( mesh = None, file = None, only = [None], ignore = [None], help = False ):</p>
+
+ 
+
+<p><img alt="picture" src = "../pictures/exportamshfile_1.png"/></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>mesh</em></td>
+<td>The mesh to export.</td>
+<td><strong>Mesh</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>-</td>
+<td>None</td>
+</tr>
+
+<tr>
+<td><em>file</em></td>
+<td>The name without extension of the file to write.<br/>
+If equals None, the name of the mesh in the study tree is taken.</td>
+<td><strong>String</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>None</td>
+</tr>
+
+<tr>
+<td><em>only</em></td>
+<td>The list of names of groups to export, excluding the others.</td>
+<td><strong>List</strong> of <strong>Strings</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>[None]</td>
+</tr>
+
+<tr>
+<td><em>ignore</em></td>
+<td>The list of names of groups to ignore.</td>
+<td><strong>List</strong> of <strong>Strings</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>[None]</td>
+</tr>
+
+<tr>
+<td><em>help</em></td>
+<td>Activates the generation of a help file giving relation between Edge and Salome node IDs (slows down the mesh export).</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+box1 = geompy.MakeBoxDXDYDZ(100, 100, 100)<br/>
+AddToStudy(box1, "box")<br/>
+<br/>
+group1 = geompy.CreateGroup(box1, geompy.ShapeType["FACE"])<br/>
+geompy.AddObject(group1, 23)<br/>
+group2 = geompy.CreateGroup(box1, geompy.ShapeType["FACE"])<br/>
+geompy.AddObject(group2, 27)<br/>
+group3 = geompy.CreateGroup(box1, geompy.ShapeType["FACE"])<br/>
+geompy.UnionIDs(group3, [13, 33, 31, 3])<br/>
+AddToStudy(group1, "inlet", father = box1)<br/>
+AddToStudy(group2, "outlet", father = box1)<br/>
+AddToStudy(group3, "wall", father = box1)<br/>
+<br/>
+mesh1 = smesh.Mesh(box1)<br/>
+<br/>
+algo = mesh1.Tetrahedron(algo = smeshBuilder.NETGEN_1D2D3D)<br/>
+hypo = algo.Parameters()<br/>
+hypo.SetMaxSize(15)<br/>
+mesh1.Compute()<br/>
+<br/>
+mesh1.GroupOnGeom(group1, typ = SMESH.FACE)<br/>
+mesh1.GroupOnGeom(group2, typ = SMESH.FACE)<br/>
+mesh1.GroupOnGeom(group3, typ = SMESH.FACE)<br/>
+<br/>
+<em>ExportAmshFile(mesh1, "mesh_example")</em><br/>
+</p>
+
+ 
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The mesh has to be computed and to contain groups describing
+the desired boundary conditions (inlet, outlet, wall, farfield, etc.).</p>
+
+<p><strong>Warning:</strong> In the case the mesh is the result of a mesh fusion, 
+the nodes and then the elements of the meshes to fuse have to be reordered <strong>before</strong>
+ the fusion, else Edge
+can detect a <strong>Max dev. of accum. surface vector</strong> superior to
+its allowed tolerance during the <strong>preprocessor</strong> command execution. </p>
+
+<p><a href="importhypotheses.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="exportsu2file.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

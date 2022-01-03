@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Prepare the Geometry - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tuto_1.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="tuto_1_2.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_1_2.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Tutorial 1</h2>
+
+<h3>Prepare the Geometry &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><a href="#prepare">Prepare the Geometry File</a></li>
+<li><a href="#open">Open a New Study</a></li>
+<li><a href="#import">Import the Foil</a></li>
+<li><a href="#rebuild">Rebuild the Foil</a></li>
+<li><a href="#domain">Create the Domain</a></li>
+<li><a href="#refinement">Create the Refinement Area</a></li>
+<li><a href="#final">Create the Final Meshable Object</a></li>
+<li><a href="#groups">Create Groups</a></li>
+</ul>
+
+</div>
+
+<h4 id="prepare">Prepare the Geometry File &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Go to the <a href="downloads.html">download page</a> of this documentation and save the file <em>naca_4508.csv</em> in your home folder.</li>
+
+</ol>
+<h4 id="open">Open a New Study &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Open Salome.</li>
+
+<li>Open a new study.</li>
+<p><strong>File &gt; New</strong></p>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Expand the Geometry node in the study tree.</li>
+<p><img alt="picture" src="../pictures/tuto_1_1_1.png"/></p>
+
+<li>Load the cfdmsh library.</li>
+<p><strong>[Ctrl] + [T]</strong> &#8594; <strong>Select the "cfdmsh.py" file on your computer</strong></p>
+
+</ol>
+<h4 id="import">Import the Foil &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Import the <em>naca_4508.csv</em> file which is in your home folder.</li>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">ImportCSVFile( "naca_4508.csv" )</p>
+<p><strong>or:</strong></p>
+<p class="code">icf( "naca_4508.csv" )</p>
+
+<li>Zoom on the imported points.</li>
+<p><strong>Click on <img alt="picture" class="button" src = "../pictures/top-icon.png"/> in the 3D window toolbar</strong></p>
+
+<li>Hide the trihedron.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/trihedron-icon.png"/> in the 3D window toolbar</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_1_1_2.png"/></p>
+
+</ol>
+<h4 id="rebuild">Rebuild the Foil &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a wire from the imported vertexes.</li>
+<p><strong>Select "VertexesFromCSVFile_1"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakeFoilFromUnsortedVertexes( )</p>
+<p><strong>or:</strong></p>
+<p class="code">mffuv( )</p>
+
+<li>For some reason, we want to distinguish upper and lower sides of the foil.
+Let's partition it with a vertex positionned at the origin.</li>
+<p><strong>New Entity &gt; Basic &gt; Point</strong> &#8594; <strong>Apply and Close</strong></p>
+<p><strong>Select "FoilFromUnsortedVertexes_1"</strong> &#8594; <strong>Operations &gt; Partition</strong> &#8594;</p>
+<p><strong>Set "Tool Objects" to "Vertex_1"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>The foil trailing edge thickness is zero, which can lead to viscous layer meshing problems.
+Let's add a smooth trailing edge of thickness 1mm.</li>
+<p><strong>Select "Partition_1"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakeFoilTrailingFillets( 1e-3 )</p>
+<p><strong>or:</strong></p>
+<p class="code">mftf( 1e-3 )</p>
+
+<li>Make a face from the foil.</li>
+<p><strong>Select "FoilWithTrailingFillet_1"</strong> &#8594; <strong>New Entity &gt; Build &gt; Face</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show only the foil.</li>
+<p><strong>Select "Face_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_1_1_3.png"/></p>
+
+</ol>
+<h4 id="domain">Create the Domain &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a disk of radius 20m.</li>
+<p><strong>New Entity &gt; Primitives &gt; Disk</strong> &#8594; <strong>Set "Radius" to 20</strong> &#8594;  <strong>Apply and Close</strong></p>
+
+<li>Cut this disk with the foil face.</li>
+<p><strong>Select "Disk_1"</strong> &#8594; <strong>Operations &gt; Boolean &gt; Cut</strong> &#8594;</p>
+<p><strong>Set "Tool Objects" to "Face_1"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show only the cut domain.</li>
+<p><strong>Select "Cut_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_1_1_4.png"/></p>
+
+</ol>
+<h4 id="refinement">Create the Refinement Area &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a rectangular face of 4m x 3m.</li>
+<p><strong>New Entity &gt; Primitives &gt; Rectangle</strong> &#8594; <strong>Set "Height" to 4 and "Width" to 3</strong> &#8594;  <strong>Apply and Close</strong></p>
+
+<li>Translate it 1m following the X direction.</li>
+<p><strong>Select "Face_2"</strong> &#8594; <strong>Operations &gt; Transformation &gt; Translation</strong> &#8594;</p>
+<p><strong>Set "Dx" to 1</strong> &#8594; <strong>Apply and Close</strong></p>
+
+</ol>
+<h4 id="final">Create the Final Meshable Object &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Partition the cut domain with the refinement area.</li>
+<p><strong>Select "Cut_1"</strong> &#8594; <strong>Operations &gt; Partition</strong> &#8594;</p>
+<p><strong>Set "Tool Objects" to "Translation_1"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show only the partitioned domain.</li>
+<p><strong>Select "Partition_2"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_1_1_5.png"/></p>
+
+</ol>
+<h4 id="groups">Create Groups &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Hide everything in the 3D window.</li>
+<p><strong>Right-click in the 3D window &gt; Hide All</strong></p>
+
+<li>Create a 1D group containing the foil and called "foil".</li>
+<p><strong>Select "Partition_2"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/edge_group-icon.png"/> icon</strong> &#8594; <strong>Set the "Name" to "foil"</strong> &#8594;</p>
+<p><strong>Select the foil edges in the 3D window</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_1_1_6.png"/></p>
+<p><strong>Click on "Add"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Create a 2D group containing the refinement area face and called "refined".</li>
+<p><strong>Select "Partition_2"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/face_group-icon.png"/> icon</strong> &#8594; <strong>Set the "Name" to "refined"</strong> &#8594;</p>
+<p><strong>Select the refined face in the 3D window</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_1_1_7.png"/></p>
+<p><strong>Click on "Add"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_1_1_8.png"/></p>
+
+<p>The geometry is ready.</p>
+
+</ol>
+
+<p><a href="tuto_1_2.html">NEXT STEP</a></p>
+
+<p><a href="tuto_1_2.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_1_2.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tuto_1.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			New Features - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="tutorials.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="commonarguments.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>New Features</h2>
+
+<p>Here are listed major modifications made from the 3.0 version of cfdmsh.</p>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><strong><a href="#doc">Newly Documented Functions</a></strong></li>
+<li><strong><a href="#new">New Functions</a></strong></li>
+<li><strong><a href="#improved">Improved Functions</a></strong></li>
+<li><strong><a href="#other">Other Modifications</a></strong></li>
+</ul>
+
+</div>
+
+<h3 id="doc">Newly Documented Functions &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The following functions were cleaned and are for the first time documented.</p>
+
+<h4>Internal Functions &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<ul>
+<li><a href="listcomponentshapes.html">List Component Shapes</a></li>
+<li><a href="checkobjectexistence.html">Check Object Existence</a></li>
+<li><a href="getnextnameindex.html">Get Next Name Index</a></li>
+<li><a href="addtostudy.html">Add To Study</a></li>
+<li><a href="getobject.html">Get Object</a></li>
+<li><a href="getsubshapes.html">Get Sub Shapes</a></li>
+<li><a href="getguiselection.html">Get GUISelection</a></li>
+<li><a href="printdefinedfunctions.html">Print Defined Functions</a></li>
+<li><a href="printversion.html">Print Version</a></li>
+</ul>
+
+<h3 id="new">New Functions &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The following functions were created:</p>
+
+<h4 id="geometry">Geometry Module &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<h5 id="measure">Measurement &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<h6>Edges &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h6>
+
+<ul>
+<li><a href="getboundaryvertexes.html">Get Boundary Vertexes</a></li>
+<li><a href="getreorderededges.html">Get Reordered Edges</a></li>
+</ul>
+
+<h6>Vectors &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h6>
+
+<ul>
+<li><a href="getnormalizedvector.html">Get Normalized Vector</a></li>
+<li><a href="getcrossproduct.html">Get Cross Product</a></li>
+<li><a href="getdotproduct.html">Get Dot Product</a></li>
+<li><a href="getturnangle.html">Get Turn Angle</a></li>
+</ul>
+
+
+<h5 id="repair">Repair &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<h6>Splines or Edges &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h6>
+
+<ul>
+<li><a href="discretizeedgebycurvature.html">Discretize Edge By Curvature</a></li>
+<li><a href="extendsplinestointersection.html">Extend Splines To Intersection</a>
+</ul>
+
+<h6>Spline Sets &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h6>
+
+<ul>
+<li><a href="switchsplineset.html">Switch Spline Set</a>
+</ul>
+
+<h6>Faces &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h6>
+
+<ul>
+<li><a href="fuseshellfaces.html">Fuse Shell Faces</a></li>
+<li><a href="fusegroupfaces.html">Fuse Group Faces</a></li>
+</ul>
+
+<h6>Foils &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h6>
+
+<ul>
+<li><a href="makefoiltrailingfillet.html">Make Foil Trailing Fillet</a>
+</ul>
+
+<h5 id="basic">Basic Geometry Generation &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<h6>Foils &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h6>
+
+<ul>
+<li><a href="makefoilfromunsortedvertexes.html">Make Foil From Unsorted Vertexes</a>
+</ul>
+
+<h5 id="vl_geom">Viscous Layer Generation &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<h6>2D &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h6>
+
+<ul>
+<li><a href="makeplanarwireoffset.html">Make Planar Wire Offset</a></li>
+</ul>
+
+<h5 id="csv">Import/Export &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="exportcsvfile.html">Export CSVFile</a></li>
+<li><a href="importcsvfile.html">Import CSVFile</a>
+</ul>
+
+<h4 id="multi">Geometry + Mesh modules &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<h5 id="vl_mixed">Viscous Layer Meshing &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="makevirtualoffsetedgesubmesh.html">Make Virtual Offset Edge Submesh</a></li>
+<li><a href="maketriedgefacesubmeshes.html">Make Tri Edge Face Submeshes</a></li>
+<li><a href="projectedgesubmesh.html">Project Edge Submesh</a>
+</ul>
+
+<h4 id="mesh">Mesh Module &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<h5 id="export">Mesh Export &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h5>
+
+<ul>
+<li><a href="exportsu2file.html">Export SU2File</a>
+</ul>
+
+<h3 id="improved">Improved Functions &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<ul>
+	<li>The 2D viscous layer design functions
+	<a href="makeedgeoffset.html">MakeEdgeOffset</a>, 
+	<a href="extendviscouslayer.html">ExtendViscousLayer</a> and 
+	<a href="closeviscouslayer.html">CloseViscousLayer</a> are now able to return faces
+	by setting <em>dim</em> = 2.</li>
+	
+	<li>The <a href="extendspline.html">ExtendSpline</a> function allows now to force the extension 
+	to be straight from the input edge end point to the target position. The user can manage this
+	feature through the <em>strat</em> argument, which can equal <em>"flex"</em> or <em>"rigid"</em>.</li>
+	
+	<li>The <a href="splitedge.html">SplitEdge</a> and <a href="rebuildspline.html">RebuildSpline</a>
+	functions allow now to give a list of parameters instead of a number of points.</li>
+	
+	<li>In the <a href="fusesplines.html">FuseSplines</a> function, 
+	the number of points given in the <em>np</em> argument is now divided up between edges to fuse
+	according to their length. This allows to fuse without problem 
+	splines having a very high length difference.</li>
+	
+	<li>Many functions are now taking into account the curvature of input edges to give
+	more precise results while minimizing the necessary number of internal points used to 
+	rebuild or create shapes.
+	This new feature can be disabled through a new Boolean argument <em>curv</em>
+	which was added to the following functions:<br/>&nbsp;
+	<ul>
+	<li><a href="fusesplines.html">FuseSplines</a></li>
+	<li><a href="extendspline.html">ExtendSpline</a></li>
+	<li><a href="fusesplinesets.html">FuseSplineSets</a></li>
+	<li><a href="makeedgeoffset.html">MakeEdgeOffset</a></li>
+	<li><a href="maketipviscouslayer.html">MakeTipViscousLayer</a></li>
+	</ul>
+	</li>
+	
+	<li>Many functions can now return shapes separately, so as to allow the user to 
+	get them in the order found by the cfdmsh function instead of getting a single compound.
+	The return type can be managed through a new Boolean argument <em>single</em>
+	which was added to the following functions:<br/>&nbsp;
+	<ul>
+	<li><a href="rebuildspline.html">RebuildSpline</a></li>
+	<li><a href="splitedge.html">SplitEdge</a></li>
+	<li><a href="fusesplines.html">FuseSplines</a></li>
+	<li><a href="extendspline.html">ExtendSpline</a></li>
+	<li><a href="rebuildface.html">RebuildFace</a></li>
+	<li><a href="makemiddlespline.html">MakeMiddleSpline</a></li>
+	<li><a href="makecurvefromunsortedvertexes.html">MakeCurveFromUnsortedVertexes</a></li>
+	<li><a href="makeellipticalfilling.html">MakeEllipticalFilling</a></li>
+	<li><a href="makefillingfromunsortededges.html">MakeFillingFromUnsortedEdges</a></li>
+	<li><a href="makeedgeoffset.html">MakeEdgeOffset</a></li>
+	</ul>
+	</li>
+	
+	<li>In the following functions, the default name of exported/imported files was modified
+	so as to avoid them to replace by mistake an existing file not linked with cfdmsh.<br/>&nbsp;
+	<ul>
+	<li><a href="exportgeometricalgroups.html">ExportGeometricalGroups</a></li>
+	<li><a href="importgeometricalgroups.html">ImportGeometricalGroups</a></li>
+	<li><a href="exportmeshconfiguration.html">ExportMeshConfiguration</a></li>
+	<li><a href="importmeshconfiguration.html">ImportMeshConfiguration</a></li>
+	<li><a href="exporthypotheses.html">ExportHypotheses</a></li>
+	<li><a href="importhypotheses.html">ImportHypotheses</a></li>
+	</ul>
+	</li>
+	
+</ul>
+
+<h3 id="other">Other Modifications &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<ul>
+<li>Since cfdmsh is before all optimized for GUI use, the order of arguments could change a bit
+due to the decrease of the importance of the <em>np</em> argument in functions 
+taking now into account the input edge curvature.</li>
+</ul>
+
+<p><a href="tutorials.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="commonarguments.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

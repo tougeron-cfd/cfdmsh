@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Generate the 3D Mesh - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tuto_2.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="tuto_2_3.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_2_1.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Tutorial 2</h2>
+
+<h3>Generate the 3D Mesh &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><a href="#quad">Generate Quadrangles</a></li>
+<li><a href="#tri">Mesh Tri-Edge Faces</a></li>
+<li><a href="#tip">Mesh the Wing Tip</a></li>
+<li><a href="#volume">Generate the Volume Mesh</a></li>
+</ul>
+
+</div>
+
+<h4 id="quad">Generate Quadrangles &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Get "non-block" faces.</li>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>Inspection &gt; Get Non Blocks</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Put all sub-faces into a face group.</li>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">PutAllSubShapesInAGroup( 2 )</p>
+<p><strong>or:</strong></p>
+<p class="code">passiag( 2 )</p>
+
+<li>Get "block" faces.</li>
+<p><strong>Select "AllSubShapes (Faces)"</strong> &#8594; <strong>New Entity &gt; Group &gt; Cut Group</strong> &#8594;</p>
+<p><strong>Set the "Name" to "quad"</strong> &#8594; <strong>Set "Tool Groups" to "NonBlocksGroup_2" (being the 2D "non-block" group)</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Load the Mesh module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/mesh-icon.png"/> in the toolbar</strong></p>
+
+<li>Create a sub-mesh of the "quad" face group to generate quadrangles.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594; <strong>Select "quad"</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "Quadrangle (Mapping)"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<li>Display the mesh in shading mode.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Right-click in the 3D window &gt; Display Mode &gt; Shading</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_3_1.png"/></p>
+
+</ol>
+<h4 id="tri">Mesh Tri-Edge Faces &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Hide all in the 3D window.</li>
+<strong>Right-click in the 3D window &gt; Hide All</strong></p>
+
+<li>Get tri-edge face groups.</li>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">GetTriEdgeFaces( )</p>
+<p><strong>or:</strong></p>
+<p class="code">gtef( )</p>
+
+<li>Rename both groups visible in the following picture with the given names (using <strong>[F2]</strong>).</li>
+<p><img alt="picture" src = "../pictures/tuto_2_3_2.png"/></p>
+
+<li>Load the Mesh module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/mesh-icon.png"/> in the toolbar</strong></p>
+
+<li>Create tri-edge face sub-meshes.</li>
+<p><strong>Select all "TriEdgeFace_*" face groups + "Mesh_1"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakeTriEdgeFaceSubmeshes( )</p>
+<p><strong>or:</strong></p>
+<p class="code">mtefs( )</p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_3_3.png"/></p>
+
+</ol>
+<h4 id="tip">Mesh the Wing Tip &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Mesh the wing tip with Netgen.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594; <strong>Select "tip_source"</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "Netgen 2D"</strong> &#8594;</p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; NETGEN 2D Parameters</strong> &#8594;</p>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_3_4.png"/></p>
+
+<li>Project the "tip_source" sub-mesh parameters on the "tip_target" group.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594; <strong>Select "tip_target"</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "Projection 2D"</strong> &#8594;</p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; Source Face</strong> &#8594;</p>
+<p><strong>Set "Source Face" to "tip_source" </strong> &#8594;</p>
+<p><strong>Set "Source Mesh" to "Mesh_1"</strong> &#8594;</p>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_3_5.png"/></p>
+
+</ol>
+<h4 id="volume">Generate the Volume Mesh &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Put all sub-volumes into a volume group.</li>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">PutAllSubShapesInAGroup( 3 )</p>
+<p><strong>or:</strong></p>
+<p class="code">passiag( 3 )</p>
+
+<li>Get "block" volumes.</li>
+<p><strong>Select "AllSubShapes (Solids)"</strong> &#8594; <strong>New Entity &gt; Group &gt; Cut Group</strong> &#8594;</p>
+<p><strong>Set the "Name" to "hexa"</strong> &#8594; <strong>Set "Tool Groups" to "NonBlocksGroup_1" ( being the 3D "non-block" group) </strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Rename the 3D "non-block" group ("NonBlocksGroup_1") to "prisms" (using <strong>[F2]</strong>).</li>
+
+<li>Load the Mesh module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/mesh-icon.png"/> in the toolbar</strong></p>
+
+<li>Create an "hexa" sub-mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594; <strong>Select "hexa"</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "Hexahedron (i,j,k)"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Create an "prism" sub-mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594; <strong>Select "prisms"</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "3D Extrusion"</strong> &#8594; <strong>Apply and Close</strong> &#8594; <strong>No</strong></p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<li>Show only the "prism" sub-mesh in wireframe mode.</li>
+<p><strong>Select "Sub-mesh_14"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+<p><strong>Select "Sub-mesh_14"</strong> &#8594; <strong>Right-click in the 3D window &gt; Display Mode &gt; Wireframe</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_3_7.png"/></p>
+<p><img alt="picture" src="../pictures/tuto_2_3_8.png"/></p>
+<p><img alt="picture" src="../pictures/tuto_2_3_9.png"/></p>
+
+<li>Show only the mesh volumes in shading mode.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Right-click in the 3D window &gt; Display Mode &gt; Shading</strong></p>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Right-click in the 3D window &gt; Display Entity &gt; (disable) Face</strong></p>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Right-click in the 3D window &gt; Display Entity &gt; (enable) Volumes</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_3_6.png"/></p>
+
+<p>You can close this study.</p>
+
+</ol>
+
+<p>END OF THIS TUTORIAL</p>
+
+<p><a href="tuto_2_3.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_2_1.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tuto_2.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

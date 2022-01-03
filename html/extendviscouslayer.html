@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			ExtendViscousLayer - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="makeplanarwireoffset.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="closeviscouslayer.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>ExtendViscousLayer</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Extends a 2D trailing edge viscous layer.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The input wire is first closed with an additional edge linking its boundaries. 
+Then, this closing edge is extruded perpendicular to the wire plane normal 
+direction. The normal of the extrusion gives the extension direction. 
+The closing edge is then translated and its length is scaled 
+according to the <em>ratio</em> given by the user.
+The translated edge is then split into edges with the same proportions as in the 
+source wire, excepted that the source middle edge length is first multiplied by the 
+<em>scale</em> factor given by the user before being "projected" on the ending edge. Finally,
+edges linking the source wire and the split ending edges are created and smoothed.</p>
+
+<p>The user can also ask for the creation of faces linking internal and side extension edges.</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">def ExtendViscousLayer( dist, wire = None, face = None, plane = None, scale = 1, ratio = 1, style = "smooth", coef = 0.5, tol = 1e-7, rev = False, add = True, infa = False, dim = 1 ):</p>
+
+ 
+
+<p><img alt="picture" src = "../pictures/extendviscouslayer_1.png"/></p>
+<p><img alt="picture" src="../pictures/extendviscouslayer_2.png"/></p>
+<p><img alt="picture" src="../pictures/extendviscouslayer_3.png"/></p>
+<p><img alt="picture" src="../pictures/extendviscouslayer_4.png"/></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>dist</em></td>
+<td>The length of the extension.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><em>wire</em></td>
+<td>The input wire.</td>
+<td><strong>Wire</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>None</td>
+</tr>
+
+<tr>
+<td><em>face</em></td>
+<td>See <a href="commonarguments.html#face">here</a>.</td>
+<td><strong>Face</strong></td>
+<td>-</td>
+<td>yes</td>
+<td>-</td>
+<td><em>None</em></td>
+</tr>
+
+<tr>
+<td><em>plane</em></td>
+<td>See <a href="commonarguments.html#plane">here</a>. If the input edge is straight, the default plane is the OXY plane.</td>
+<td><strong>Face</strong></td>
+<td>-</td>
+<td>yes</td>
+<td>-</td>
+<td><em>None</em></td>
+</tr>
+
+<tr>
+<td><em>scale</em></td>
+<td>The scale coefficient applied on the source middle edge before being "projected" on the end wire.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><em>1</em></td>
+</tr>
+
+<tr>
+<td><em>ratio</em></td>
+<td>The ratio between the ending wire and the input wire lengthes.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><em>1</em></td>
+</tr>
+
+<tr>
+<td><em>style</em></td>
+<td>See <a href="commonarguments.html#style">here</a>.</td>
+<td><strong>String</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><em>"smooth"</em></td>
+</tr>
+
+<tr>
+<td><em>coef</em></td>
+<td>A coefficient influencing the curvature of the extension edges (0 &lt; <em>coef</em> &lt; 1).<br/>
+The greater it is, the greater is the curvature.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><em>0.5</em></td>
+</tr>
+
+<tr>
+<td><em>tol</em></td>
+<td>See <a href="commonarguments.html#tol">here</a>.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>1e-7</td>
+</tr>
+
+<tr>
+<td><em>rev</em></td>
+<td>See <a href="commonarguments.html#rev">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td><em>add</em></td>
+<td>See <a href="commonarguments.html#add">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>infa</em></td>
+<td>See <a href="commonarguments.html#infa">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td><em>dim</em></td>
+<td>See <a href="commonarguments.html#dim">here</a>.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>1</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>-</td>
+<td><strong>Compound</strong> of <strong>Edges</strong></td>
+<td><em>1</em></td>
+<td><em>"ViscousLayerExtension"</em></td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>-</td>
+<td><strong>Shell</strong> or <strong>Compound</strong> of <strong>Faces</strong></td>
+<td><em>1</em></td>
+<td><em>"ViscousLayerExtension (Faces)"</em></td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+vertex1 = geompy.MakeVertex(-10, 75, 0)<br/>
+vertex2 = geompy.MakeVertex(0, 10, 0)<br/>
+vertex3 = geompy.MakeVertex(0, -10, 0)<br/>
+vertex4 = geompy.MakeVertex(-10, -75, 0)<br/>
+<br/>
+wire = geompy.MakePolyline([vertex1, vertex2, vertex3, vertex4])<br/>
+AddToStudy(wire, "wire")<br/>
+<br/>
+<em>extension = ExtendViscousLayer(300, wire)</em><br/>
+<em>extension = ExtendViscousLayer(300, wire, rev = True, scale = 5)</em><br/>
+<em>extension = ExtendViscousLayer(300, wire, rev = True, ratio = 1.5)</em><br/>
+<em>extension = ExtendViscousLayer(300, wire, rev = True, ratio = 1.5, coef = 0.75)</em><br/>
+</p>
+
+ 
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The input wire has to contain two or three connected edges.</p>
+
+<p>In addition, if the input wire is straight, it is also necessary to 
+set the <em>face</em> or the <em>plane</em> argument so as to give the 
+function the extension direction</p>
+
+<p><a href="makeplanarwireoffset.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="closeviscouslayer.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

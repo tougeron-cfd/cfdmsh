@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Generate the Mesh - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tuto_1.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="tuto_1_1.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_1_1.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Tutorial 1</h2>
+
+<h3>Generate the Mesh &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><a href="#mesh">Create the Mesh</a></li>
+<li><a href="#refined">Create the Refinement Sub-mesh</a></li>
+<li><a href="#foil">Create Foil Edge Sub-meshes</a></li>
+</ul>
+
+</div>
+
+<h4 id="mesh">Create the Mesh &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Load the Mesh module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/mesh-icon.png"/> in the toolbar</strong></p>
+
+<li>Create a mesh on the final meshable object, using Netgen and letting default settings.</li>
+<p><strong>Select "Partition_2"</strong> &#8594; <strong>Mesh &gt; Create Mesh</strong> &#8594; </p>
+<p><strong>Set "Algorithm" to "Netgen 1D-2D"</strong> &#8594; </p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; NETGEN 2D Parameters</strong> &#8594;</p>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+</ol>
+<h4 id="refined">Create the Refinement Sub-mesh &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a sub-mesh on the refinement area having a max cell size of 0.05m and a viscous layers of 5cm having 30 layers with a ratio of 1.2.</li>
+
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Create Sub-mesh</strong> &#8594;</p>
+<p><strong>Select the refined area face group ("refined")</strong> &#8594;</p>
+<p><strong>Set "Algorithm" to "Netgen 1D-2D"</strong> &#8594; </p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Hypothesis" &gt; NETGEN 2D Parameters</strong> &#8594;</p>
+<p><strong>Set "Max. Size" to 0.05</strong> &#8594; <strong>OK</strong> &#8594; </p>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/hypo-icon.png"/> beside "Add. Hypothesis" &gt; Viscous Layers 2D</strong> &#8594;</p>
+<p><strong>Set "Total thickness" to 0.05</strong> &#8594; <strong>Set "Number of layers" to 30</strong> &#8594; <strong>Set "Strech factor" to 1.2</strong> &#8594;</p>
+<p><strong>Select "Edges with layers (walls)"</strong> &#8594; <strong>Select the foil group ("foil")</strong> &#8594; <strong>click on "Add"</strong> &#8594;</p>
+<p><strong>OK</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select "Mesh_1"</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<li>Zoom on the mesh.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/top-icon.png"/> in the 3D window toolbar</strong></p>
+
+<li>Hide the trihedron.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/trihedron-icon.png"/> in the 3D window toolbar</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_1_2_1.png"/></p>
+
+</ol>
+<h4 id="foil">Create Foil Edge Sub-meshes &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Visualize the virtual offset around the foil for a viscous layer thickness of 0.05m and a cell size of 0.01m.</li>
+<p><strong>Select the foil group ("foil") and "Mesh_1" together</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakeVirtualOffsetEdgeSubmeshes( [ 0.05, 0.01 ], dim = 1 )</p>
+<p><strong>or:</strong></p>
+<p class="code">mvoes( [ 0.05, 0.01 ], dim = 1 )</p>
+
+<li>The virtual offset should be wrongly oriented like in the following picture. So, try to reverse it.</li>
+<p><img alt="picture" src = "../pictures/tuto_1_2_2.png"/></p>
+<p><strong>Select the foil group ("foil") and "Mesh_1" together</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakeVirtualOffsetEdgeSubmeshes( [ 0.05, 0.01 ] , dim = 1, <em>rev = 1</em> )</p>
+<p><strong>or:</strong></p>
+<p class="code">mvoes( [ 0.05, 0.01 ] , dim = 1, <em>rev = 1</em> )</p>
+
+<li>This time, the virtual offset should be well oriented like in the following picture. 
+You can then display internal vertexes used by the VirtualOffsetEdgeSubmesh function.</li>
+<p><img alt="picture" src = "../pictures/tuto_1_2_3.png"/></p>
+<p><strong>Select the foil group ("foil") and "Mesh_1" together</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakeVirtualOffsetEdgeSubmeshes( [ 0.05, 0.01 ] , <em>dim = 0</em>, rev = 1 )</p>
+<p><strong>or:</strong></p>
+<p class="code">mvoes( [ 0.05, 0.01 ] , <em>dim = 0</em>, rev = 1 )</p>
+
+<p><img alt="picture" src = "../pictures/tuto_1_2_4.png"/></p>
+<p><img alt="picture" src="../pictures/tuto_1_2_5.png"/></p>
+
+<li>Create the virtual offset edge sub-meshes on the foil.</li>
+<p><strong>Select the foil group ("foil") and "Mesh_1" together</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakeVirtualOffsetEdgeSubmeshes( [ 0.05, 0.01 ] )</p>
+<p><strong>or:</strong></p>
+<p class="code">mvoes( [ 0.05, 0.01 ] )</p>
+
+<li>Compute the mesh.</li>
+<p><strong>Select Mesh_1</strong> &#8594; <strong>Mesh &gt; Compute</strong> &#8594; <strong>Close</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_1_2_6.png"/></p>
+<p><img alt="picture" src="../pictures/tuto_1_2_7.png"/></p>
+<p><img alt="picture" src="../pictures/tuto_1_2_8.png"/></p>
+
+<p>You can close this study.</p>
+
+</ol>
+
+<p>END OF THIS TUTORIAL</p>
+
+<p><a href="tuto_1_1.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_1_1.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tuto_1.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Create the blocking - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tuto_2.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="tuto_2_3.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_2_2.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Tutorial 2</h2>
+
+<h3>Create the Wing Blocking &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><a href="#prepare">Prepare the Geometry File</a></li>
+<li><a href="#open">Open a New Study</a></li>
+<li><a href="#import">Import the Foil</a></li>
+<li><a href="#rebuild">Rebuild the Foil</a></li>
+<li><a href="#create">Create the Viscous Layer Blocking</a></li>
+<li><a href="#extend">Extend the Viscous Layer</a></li>
+<li><a href="#tip">Create the Wing Tip Geometry</a></li>
+<li><a href="#link">Link 2D Blockings</a></li>
+</ul>
+
+</div>
+
+<h4 id="prepare">Prepare the Geometry File &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Go to the <a href="downloads.html">download page</a> of this documentation and save the file <em>naca_0012.iges</em> on your computer.</li>
+
+</ol>
+<h4 id="open">Open a New Study &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Open Salome.</li>
+
+<li>Open a new study.</li>
+<p><strong>File &gt; New</strong></p>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Expand the Geometry node in the study tree.</li>
+<p><img alt="picture" src="../pictures/tuto_1_1_1.png"/></p>
+
+<li>Load the cfdmsh library.</li>
+<p><strong>[Ctrl] + [T]</strong> &#8594; <strong>Select the "cfdmsh.py" file on your computer</strong></p>
+
+</ol>
+<h4 id="import">Import the Foil &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Import the <em>naca_0012.iges</em> file you saved on your computer.</li>
+<p><strong>File &gt; Import &gt; IGES</strong></p>
+
+<li>Zoom on the imported geometry.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/top-icon.png"/> in the 3D window toolbar</strong></p>
+
+<li>Hide the trihedron.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/trihedron-icon.png"/> in the 3D window toolbar</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_1_1.png"/></p>
+
+</ol>
+<h4 id="rebuild">Rebuild the Foil &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>The imported foil is open at the trailing edge and split into a set of straight segments. 
+Let's create a closed and smooth wire from it.</li>
+<p><strong>Select "naca_0012.iges_1"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakeFoilFromUnsortedVertexes( )</p>
+<p><strong>or:</strong></p>
+<p class="code">mffuv( )</p>
+
+<li>For some reason, we want to distinguish upper and lower sides of the foil.
+Let's partition it with a vertex positionned at the origin.</li>
+<p><strong>New Entity &gt; Basic &gt; Point</strong> &#8594; <strong>Apply and Close</strong></p>
+<p><strong>Select "FoilFromUnsortedVertexes_1"</strong> &#8594; <strong>Operations &gt; Partition</strong> &#8594;</p>
+<p><strong>Set "Tool Objects" to "Vertex_1"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show only the foil.</li>
+<p><strong>Select "Partition_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+</ol>
+<h4 id="create">Create the Viscous Layer Blocking &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a 2D viscous layer blocking around the foil, having a uniform thickness of 5cm.</li>
+<p><strong>Select "Partition_1"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakePlanarWireOffset( 0.05, dim = 2 )</p>
+<p><strong>or:</strong></p>
+<p class="code">mpwo( 0.05, dim = 2 )</p>
+
+<li>The blocking should be extruded in the wrong direction, like in the following picture.
+Lets' reverse it.</li>
+<p><img alt="picture" src = "../pictures/tuto_2_1_2.png"/></p>
+<p><strong>Select "Partition_1"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakePlanarWireOffset( 0.05, dim = 2, <em>rev = 1</em> )</p>
+<p><strong>or:</strong></p>
+<p class="code">mpwo( 0.05, dim = 2, <em>rev = 1</em> )</p>
+
+<p><img alt="picture" src = "../pictures/tuto_2_1_3.png"/></p>
+
+</ol>
+<h4 id="extend">Extend the Viscous Layer &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Hide everything in the 3D window.</li>
+<p><strong>Right-click in the 3D window &gt; Hide All</strong></p>
+
+<li>Create a face group including all blocking faces being at the left of the foil trailing edge.</li>
+<p><strong>Select "WireOffset (Faces)_2"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/face_group-icon.png"/> icon</strong> &#8594; <strong>Select the following faces</strong> &#8594; <strong>Click on "Add"</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_2_1_4.png"/></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Create an edge group including all edges being at the foil trailing edge position.</li>
+<p><strong>Select "WireOffset (Faces)_2"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/edge_group-icon.png"/> icon</strong> &#8594; <strong>Select the following edges</strong> &#8594; <strong>Click on "Add"</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_2_1_5.png"/></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Show only the newly created groups.</li>
+<p><strong>Select "WireOffset (Faces)_2"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_1_6.png"/></p>
+
+<li>Extend the viscous layer blocking at a distance of 1m.</li>
+<p><strong>Select the edge group ("Group_2")</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">ExtendViscousLayer( 1.5, ratio = 5, scale = 10, coef = 0.4, dim = 2 )</p>
+<p><strong>or:</strong></p>
+<p class="code">evl( 1.5, ratio = 5, scale = 10, coef = 0.4, dim = 2 )</p>
+
+<li>Put the face group and the viscous layer extension into a shell.</li>
+<p><strong>Select the face group ("Group_1") and "ViscousLayerExtension (Faces)_1"</strong> &#8594;</p>
+<p><strong>New Entity &gt; Build &gt; Shell</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show only the blocking.</li>
+<p><strong>Select "Shell_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_1_7.png"/></p>
+
+</ol>
+<h4 id="tip">Create the Wing Tip Geometry &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Make a scale of the viscous layer blocking, having a ratio of 0.6.</li>
+<p><strong>Select "Shell_1"</strong> &#8594; <strong>Operations &gt; Transformation &gt; Scale Transform</strong> &#8594;</p>
+<p><strong>Set the "Scale Factor" to 0.6</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Add a rotation around the origin of -10deg.</li>
+<p><strong>Select "Scale_1"</strong> &#8594; <strong>Operations &gt; Transformation &gt; Rotation</strong> &#8594;</p>
+<p><strong>Set "Axis" to "OZ" (in the study tree)</strong> &#8594;</p>
+<p><strong>Set the "Angle" to -10</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Add a translation of 5m following the Z axis.</li>
+<p><strong>Select "Rotation_1"</strong> &#8594; <strong>Operations &gt; Transformation &gt; Translation</strong> &#8594;</p>
+<p><strong>Set "Dz" to 5"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show only the root and tip blockings.</li>
+<p><strong>Select "Shell_1" and "Translation_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_1_8.png"/></p>
+
+</ol>
+<h4 id="link">Link 2D Blockings &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create one edge linking each pair of similar nodes on each blockings.</li>
+<p><strong>New Entity &gt; Build &gt; Edge</strong> &#8594; <strong>Select successively each pair of nodes, like in the following pictures, and click on "Apply"</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_2_1_9.png"/></p>
+<p><strong>Close</strong></p>
+
+<li>Check you have well created 10 new edges.</li>
+
+<p><img alt="picture" src="../pictures/tuto_2_1_10.png"/></p>
+
+<li>Put newly created edges into a compound.</li>
+<p><strong>Select "Edge_1" to "Edge_10"</strong> &#8594; <strong>New Entity &gt; Build &gt; Compound</strong>  &#8594; <strong>Apply and Close</strong></p>
+
+<li>Link blockings with solids.</li>
+<p><strong>Select both blocking shells ("Shell_1" and "Translation_1") + "Compound_1"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakeLinkingSolids( )</p>
+<p><strong>or:</strong></p>
+<p class="code">mls( )</p>
+
+<li>Show only the linking solids.</li>
+<p><strong>Select "LinkingSolids_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_1_11.png"/></p>
+
+</ol>
+
+<p><a href="tuto_2_2.html">NEXT STEP</a></p>
+
+<p><a href="tuto_2_3.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_2_2.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tuto_2.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

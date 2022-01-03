@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Rebuild Nose Faces - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tuto_3.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="tuto_3_3.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_3_2.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Tutorial 3</h2>
+
+<h3>Rebuild Nose Faces &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><a href="#prepare">Prepare the Geometry File</a></li>
+<li><a href="#open">Open a New Study</a></li>
+<li><a href="#import">Import the Geometry</a></li>
+<li><a href="#split">Split the Geometry</a></li>
+<li><a href="#groups">Create Groups</a></li>
+<li><a href="#fuse">Fuse Faces</a></li>
+<li><a href="#fix">Fix Boundary Edges</a></li>
+<li><a href="#compare">Compare Geometries</a></li>
+</ul>
+
+</div>
+
+<h4 id="prepare">Prepare the Geometry File &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Go to the <a href="downloads.html">download page</a> of this documentation and save the files <em>a380-nose.brep</em> in your home folder.</li>
+
+</ol>
+<h4 id="open">Open a New Study &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Open Salome.</li>
+
+<li>Open a new study.</li>
+<p><strong>File &gt; New</strong></p>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Expand the Geometry node in the study tree.</li>
+<p><img alt="picture" src="../pictures/tuto_1_1_1.png"/></p>
+
+<li>Load the cfdmsh library.</li>
+<p><strong>[Ctrl] + [T]</strong> &#8594; <strong>Select the "cfdmsh.py" file on your computer</strong></p>
+
+</ol>
+<h4 id="import">Import the Geometry &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Import the <em>a380-nose.brep</em> file which is in your home folder.</li>
+<p><strong>File &gt; Import &gt; BREP</strong></p>
+
+<li>Zoom on the imported geometry.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/fit-icon.png"/> in the 3D window toolbar</strong></p>
+
+<li>Hide the trihedron.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/trihedron-icon.png"/> in the 3D window toolbar</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_3_1_1.png"/></p>
+
+</ol>
+<h4 id="split">Split the Geometry &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a vertex at the middle of the nose edge.<li>
+<p><strong>New Entity &gt; Basic &gt; Point</strong> &#8594; <strong>Select the <img alt="picture" class="button" src="../pictures/on_edge-icon.png"/> icon</strong> &#8594;</p>
+<p><strong>Select the edge visible in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_3_1_2.png"/></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Create an edge linking both corner vertexes of the geometry.</li>
+<p><strong>Unselect "Vertex_1"</strong>  &#8594; <strong>New Entity &gt; Build &gt; Edge</strong>  &#8594;</p>
+<p><strong>Select successively the vertexes visible in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_3_1_3.png"/></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Create a vertex at the middle of the newly created edge.</li>
+<p><strong>Select "Edge_1"</strong> &#8594; <strong>New Entity &gt; Basic &gt; Point</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/on_edge-icon.png"/> icon</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Create an edge linking both created vertexes.</li>
+<p><p><strong>Select "Vertex_1"</strong> &#8594; <strong>New Entity &gt; Build &gt; Edge</strong> &#8594;</p>
+<p><strong>Select "Vertex_2" </strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Extrude symmetrically this edge 5m following the Y direction.</li>
+<p><strong>Select "Edge_2"</strong> &#8594; <strong>New Entity &gt; Generation &gt; Extrusion</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/dxdydz_extrude-icon.png"/> icon</strong> &#8594;
+<strong>Set "Dy" to 5</strong> &#8594; <strong>Activate the "Both Directions" option</strong> &#8594;</p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Split the geometry with the extruded edge.</li>
+<p><strong>Select "a380-nose.brep_1"</strong> &#8594; <strong>Operartions &gt; Partition</strong> &#8594;</p>
+<p><strong>Set "Tool Objects" to "Extrusion_1" </strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show only the split geometry.</li>
+<p><strong>Select "Partition_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_3_1_4.png"/></p>
+
+</ol>
+<h4 id="groups">Create Groups &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create face groups corresponding to the ones visible in the following picture.</li>
+<p><img alt="picture" src="../pictures/tuto_3_1_5.png"/></p>
+
+<p><strong>Select "Partition_1"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/face_group-icon.png"/> icon</strong> &#8594;
+<strong>Select the desired faces</strong> &#8594; <strong>Click on "Add"</strong> &#8594;</p>
+<p><strong>Apply</strong> / <strong>Apply and Close</strong></p>
+
+<li>Create a face group containing the rest of the faces.</li>
+<p><strong>Select "Partition_1"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/face_group-icon.png"/> icon</strong> &#8594;
+<strong>Click on "Select All"</strong> &#8594;</p>
+<p><strong>Select each existing face group ("Group_*")</strong> &#8594; <strong>Click on "Remove"</strong>  &#8594;</p>
+<p><strong>Apply and Close</strong></p>
+
+</ol>
+<h4 id="fuse">Fuse Faces &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Show nodes which will be used to fuse each "Group_*"</li>
+<p><strong>Select all "Group_*"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">FuseShellFaces( dim = 0 )</p>
+<p><strong>or:</strong></p>
+<p class="code">fsf( dim = 0 )</p>
+
+<p><img alt="picture" src = "../pictures/tuto_3_1_6.png"/></p>
+
+<li>Fuse each "Group_*" faces.</li>
+<p><strong>Select all "Group_*"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">FuseShellFaces( )</p>
+<p><strong>or:</strong></p>
+<p class="code">fsf( )</p>
+
+<li>Show only the fused faces.</li>
+<p><strong>Select all "FusedShell_*"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_3_1_7.png"/></p>
+
+</ol>
+<h4 id="fix">Fix Boundary Edges &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Show only the fused face on the nose.</li>
+<p><strong>Select "FusedShell_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<li>Display vertexes of this face.</li>
+<p><strong>Select "FusedShell_1"</strong>  &#8594; <strong>Right-click in the 3D window &gt; Display Mode &gt; Show Vertices</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_3_1_8.png"/></p>
+
+<p>An undesirable vertex, which can strongly affect the surface mesh quality, is present on the boundary of the face
+(in yellow in the previous picture). Let's remove it.</p>
+
+<li>Get the sub-edges of this face.</li>
+<p><strong>Select "FusedShell_1"</strong>  &#8594; <strong>New Entity &gt; Explode</strong> &#8594;</p>
+<p><strong>Set "Sub-shapes Type" to "Edge"</strong>  &#8594; <strong>Apply and Close</strong></p>
+
+<li>Look for "zero-length" edge(s) hidden into corners of the face by trying to select them like in the following 
+picture and delete them (using <strong>[Del]</strong>).</li>
+
+<p><img alt="picture" src="../pictures/tuto_3_1_9.png"/></p>
+
+<li>Fuse the edges indicated in the following picture.</li>
+<p><strong>Select the edges indicated in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_3_1_10.png"/></p>
+<p><strong>Type in the Python console:</strong></p>
+<p class="code">FuseSplines( )</p>
+<p><strong>or:</strong></p>
+<p class="code">fs( )</p>
+
+<li>Show only the edges previously exploded.</li>
+<p><strong>Select "FusedShell_1"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<li>Hide the edges which were fused.</li>
+<p><strong>Select the suitable edges</strong> &#8594; <strong>Right-click &gt; Hide</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_3_1_10-2.png"/></p>
+
+<li>Show the fused edge.</li>
+<p><strong>Select "FusedSpline_1"</strong> &#8594; <strong>Right-click &gt; Show</strong></p>
+
+<li>Create a wire from visible edges.</li>
+<p><strong>Select all visible edges</strong> &#8594; <strong>New Entity &gt; Build &gt; Wire</strong></p>
+
+<li>Relimit the fused face "FusedShell_1" with this new wire.</li>
+<p><strong>Select "FusedShell_1"</strong> &#8594; <strong>New Entity &gt; Build &gt; Face</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/relimit_face-icon.png"/> icon</strong> &#8594;
+<strong>Set "Wire" to "Wire_1" </strong></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Show only the newly created face.</li>
+<p><strong>Select "Face_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<li>Display vertexes of this face.</li>
+<p><strong>Select "Faces_1"</strong>  &#8594; <strong>Right-click in the 3D window &gt; Display Mode &gt; Show Vertices</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_3_1_11.png"/></p>
+
+</ol>
+<h4 id="compare">Compare Geometries &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a shell from fused faces and the resting faces.</li>
+<p><strong>Select "Group_4", "FusedShell_2",  "FusedShell_3" and "Face_1"</strong> &#8594;</p>
+<p><strong>New Entity &gt; Build &gt; Shell</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show only the input geometry and the rebuilt geometry, in shading mode and with different colors.</li>
+<p><strong>Select "a380-nose.brep_1" and "Shell_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+<p><strong>Select "a380-nose.brep_1" and "Shell_1"</strong> &#8594; <strong>Right-click in the 3D window&gt; Display Mode &gt; Shading</strong></p>
+<p><strong>Select "a380-nose.brep_1" and "Shell_1"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">SetRandomColors( )</p>
+<p><strong>or:</strong></p>
+<p class="code">src( )</p>
+
+<p><img alt="picture" src = "../pictures/tuto_3_1_12.png"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img alt="picture" src = "../pictures/tuto_3_1_13.png"/></p>
+
+<p>You can close this study.</p>
+
+</ol>
+
+<p><a href="tuto_3_2.html">NEXT STEP</a></p>
+
+<p><a href="tuto_3_3.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_3_2.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tuto_3.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

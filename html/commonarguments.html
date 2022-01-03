@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Common Arguments - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="newfeatures.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="cfdmshfunctions.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Common Arguments</h2>
+
+<p>Here are listed the arguments which are often used in cfdmsh.</p>
+
+<h3 id="add">add &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>add</em> argument defines if the objects which are returned 
+by the function have also to be added to the Salome study. It should be set to True 
+if the returned objects have to be added
+or False if the returned objects have not to be added.</p>
+
+<h3 id="curv">curv &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>curv</em> argument defines if curvature of the input edges has to be
+taken into account or not. If equals False, input shapes are split into the number of points
+defined by the <em>np</em> argument. If equals True, additional points are added 
+according to the local curvature of the input edge.</p>
+
+<h3 id="dim">dim &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>dim</em> argument defines the desired dimension of the objects to be returned. 
+It should be set to <em>0</em> if <strong>Vertexes</strong> have to be returned, <em>1</em> if 
+<strong>Edge</strong> have to be returned, <em>2</em> if <strong>Faces</strong> have to be returned
+or <em>3</em> if <strong>Solids</strong> have to be returned.
+A negative value of this argument means that the function won't return any geometrical shape.</p>
+<h3 id="dist">dist &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>dist</em> argument is commonly a distance from the input geometrical 
+object to be used during the function execution (offset distance, extension distance, etc.).</p>
+
+<h3 id="face">face &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>face</em> argument is a <strong>Face</strong> (or its name 
+in the study tree) of which the normal is used to define offset or extension direction.</p>
+
+<h3 id="file">file &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>file</em> argument defines the name of the file 
+which is read / writen during the function execution.</p>
+
+<h3 id="infa">infa &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>infa</em> argument defines if the shapes are added to the study tree inside their 
+main father object or not.</p>
+
+<h3 id="np">np &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>np</em> argument defines the number of points used 
+during the rebuild or construction of internal or returned object (during spline cutting, offset construction, etc.).
+See also the <em>curv</em> argument.</p>
+
+<h3 id="plane">plane &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>plane</em> argument is a <strong>Face</strong> (or its name 
+in the study tree) defining a plane 
+in which are built the intermediate edges 
+created during the function execution.</p>
+
+<h3 id="rev">rev &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>rev</em> argument reverses the value of the <em>dist</em> or <em>thick</em> argument when 
+it equals True (else False).</p>
+
+<h3 id="style">style &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>style</em> argument defines if edges created during the function execution 
+have to be straigth or bended. Its value can be <em>"straight"</em> or <em>"smooth"</em>.</p>
+
+<h3 id="single">single &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>single</em> argument defines if the returned shapes have to be returned separately or in a single 
+compound or shell.</p>
+
+<h3 id="tol">tol &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The <em>tol</em> argument is commonly a distance under which 
+two points are supposed to be coincident. It is commonly used during sorting 
+operations.</p>
+
+<p><a href="newfeatures.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="cfdmshfunctions.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

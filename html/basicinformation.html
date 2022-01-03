@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Basic Information - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="downloads.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Basic Information</h2>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><strong><a href="#presentation">Presentation</a></strong></li>
+<li><strong><a href="#examples">Examples</a></strong></li>
+<!-- <li><strong><a href="#documentation">Documentation</a></strong></li> -->
+</ul>
+
+</div>
+
+<h3 id="presentation">Presentation &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<h4>Salome Platform &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<p><a href="http://www.salome-platform.org/">Salome Platform</a> is a powerful opensource tool for CAD and CFD meshing. However, it
+has some limitations that cfdmsh tries to overcome in the context of viscous studies 
+in which the viscous layers have to be meshed with high attention.</p>
+
+<h4>Master Viscous Layer Design &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<p>From the 6.4.0 version of Salome, it is possible to create automatic prismatic 
+layers using the basic tools of Salome. These tools are sufficient for basic viscous 
+layer meshing. Nonetheless, engineers who want to totally master the design of their 
+viscous layer around foils may prefer to use cfdmsh instead. The philosophy of cfdmsh 
+is to create the precise shape of the viscous layer in the geometry, instead of creating 
+first a mesh and generating the prismatic layer at the very last step.</p>
+
+<h4>2D and 3D &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<p>The first aim of cfdmsh is to allow the creation in few steps of 2D "C" or "O" grids around foils, 
+extended behind it to have a smoother transition between the viscous layer meshing and the rest of the mesh.
+Nevertheless, some 3D functions, which allow to create 3D viscous layers around wings or blades, are
+also available. (See the related <a href="tutorials.html#advanced">tutorials</a> or <a href="cfdmshfunctions.html#vl_geom">cfdmsh functions</a>.)</p>
+
+<h4>Geometry Repair &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<p>Also, reconstruction tools were also implemented so as to prepare imported 3D geometries for meshing in Salome,
+especially when there are undesired sub-shapes after import. 
+(See the related <a href="tutorials.html#tuto3">tutorial</a> or <a href="cfdmshfunctions.html#repair">cfdmsh functions</a>.)</p>
+
+<h4>Accelerating Salome &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<p>But besides, cfdmsh offers additional useful functions which speed up the use of Salome in any case, 
+like the group, mesh configuration and mesh hypothesis import/export.
+(See the related <a href="tutorials.html#mini">tutorials</a> or cfdmsh functions
+for <a href="cfdmshfunctions.html#group">group</a> or <a href="cfdmshfunctions.html#config">mesh</a> management.)</p>
+
+<p>Nonetheless, interaction with the Python console when using the Salome GUI is much accelerated using cfdmsh,
+since it provides flexible and easy-to-use functions to publish or get existing objects in the Salome study tree.
+(See the related <a href="tutorials.html#preliminary">tutorial</a> or <a href="cfdmshfunctions.html#internal">cfdmsh functions</a>.)</p>
+
+<h4>Mesh Export &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<p>Finally, cfdmsh allows to export meshes in 
+<a href="http://www.foi.se/en/Customer--Partners/Projects/Edge1/Edge/">Edge</a> 5.0.0 and
+<a href="http://su2.stanford.edu/">SU2</a> 4.0.0 formats, 
+making Salome compatible with these solvers.
+(See the related <a href="cfdmshfunctions.html#export">cfdmsh functions</a>.)</p>
+
+<h4>From GUI or in Scripts &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<p>The cfdmsh library has been designed to be easily used directly from the Salome GUI, through the 
+Python console, but cfdmsh can also be used into python scripts like any other library.
+(See the related <a href="use.html">section</a>.)</p>
+
+<h3 id="examples">Examples &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Here some screenshots of what can be expected using cfdmsh. The realization of these examples in Salome without using cfdmsh would have been endless and laborious. With cfdmsh, it takes from few minutes to few hours:</p>
+
+<p>- 2D viscous layer blocking around a high-lift wing:</p>
+
+<p><img alt="picture" src="../pictures/screenshot_2.png"/></p>
+
+<p>- 3D viscous layer blocking with tip closure around a twisted blade:</p>
+
+<p><img alt="picture" src="../pictures/screenshot_1.png"/></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="downloads.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

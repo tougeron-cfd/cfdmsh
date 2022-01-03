@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			DiscretizeEdgeByCurvature - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="splitedge.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="fusesplines.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>DiscretizeEdgeByCurvature</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Discretizes an edge into a wire made of straight edges taking into account
+the local curvature.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>This function works through an iterative algorithm. First, it starts with a given number 
+of equidistant vertexes from which segments are created. 
+Then, it computes the distance between these segments and the input edge so as
+to detect which segment must be refined, and so on.</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">def DiscretizeEdgeByCurvature( edge = None, np = 20, fine = 1e3, it_max = 10, single = True, add = True, infa = False, dim = 1 ):</p>
+
+ 
+
+<p><img alt="picture" src = "../pictures/discretizeedgebycurvature_1.png"/></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>edge</em></td>
+<td>The edge to discretize.</td>
+<td><strong>Edge</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>None</td>
+</tr>
+
+<tr>
+<td><em>np</em></td>
+<td>See <a href="commonarguments.html#np">here</a>.<br/>
+In this case, corresponds to the number of vertexes used for the first iteration.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>20</td>
+</tr>
+
+<tr>
+<td><em>fine</em></td>
+<td>The desired fineness. Higher it is, finer is the discretization.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>1e3</td>
+</tr>
+
+<tr>
+<td><em>it_max</em></td>
+<td>The maximum number of iterations.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>10</td>
+</tr>
+
+<tr>
+<td><em>single</em></td>
+<td>See <a href="commonarguments.html#single">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>add</em></td>
+<td>See <a href="commonarguments.html#add">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>infa</em></td>
+<td>See <a href="commonarguments.html#infa">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td><em>dim</em></td>
+<td>See <a href="commonarguments.html#dim">here</a>.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>1</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td>False</td>
+<td><strong>Vertex</strong></td>
+<td>n</td>
+<td><em>"EdgeDiscretizedByCurvature (Vertex)"</em></td>
+</tr>
+
+<tr>
+<td>0</td>
+<td>True</td>
+<td><strong>Compound</strong> of <strong>Vertexes</strong></td>
+<td>1</td>
+<td><em>"EdgeDiscretizedByCurvature (Vertexes)"</em></td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>False</td>
+<td><strong>Edge</strong></td>
+<td>n</td>
+<td><em>"EdgeDiscretizedByCurvature (Edge)"</em></td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>True</td>
+<td><strong>Wire</strong></td>
+<td>1</td>
+<td><em>"EdgeDiscretizedByCurvature"</em></td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+import math<br/>
+<br/>
+vertexes = []<br/>
+for x in range(10):<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vertexes.append(geompy.MakeVertex(x, math.cos(x), 0))<br/>
+<br/>
+<br/>
+curve = geompy.MakeInterpol(vertexes)<br/>
+AddToStudy(curve, "curve")<br/>
+<br/>
+<em>discretized_edge = DiscretizeEdgeByCurvature(curve)</em><br/>
+<em>discretized_edge_vertexes = DiscretizeEdgeByCurvature(curve, dim = 0)</em><br/>
+</p>
+
+
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>-</p>
+
+<p><a href="splitedge.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="fusesplines.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

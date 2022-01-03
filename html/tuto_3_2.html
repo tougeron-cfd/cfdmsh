@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Rebuild Coinciding Faces - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tuto_3.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="tuto_3_1.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_3_3.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Tutorial 3</h2>
+
+<h3>Rebuild Coinciding Faces &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><a href="#prepare">Prepare the Geometry File</a></li>
+<li><a href="#open">Open a New Study</a></li>
+<li><a href="#import">Import the Geometry</a></li>
+<li><a href="#explode">Explode Sub-Faces</a></li>
+<li><a href="#sets">Create Spline Sets</a></li>
+<li><a href="#fuse">Fuse Spline Sets</a></li>
+<li><a href="#face">Build a New Face</a></li>
+<li><a href="#compare">Compare Geometries</a></li>
+</ul>
+
+</div>
+
+<h4 id="prepare">Prepare the Geometry File &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Go to the <a href="downloads.html">download page</a> of this documentation and save the files <em>a380-stabilizer.brep</em> in your home folder.</li>
+
+</ol>
+<h4 id="open">Open a New Study &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Open Salome.</li>
+
+<li>Open a new study.</li>
+<p><strong>File &gt; New</strong></p>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Expand the Geometry node in the study tree.</li>
+<p><img alt="picture" src="../pictures/tuto_1_1_1.png"/></p>
+
+<li>Load the cfdmsh library.</li>
+<p><strong>[Ctrl] + [T]</strong> &#8594; <strong>Select the "cfdmsh.py" file on your computer</strong></p>
+
+</ol>
+<h4 id="import">Import the Geometry &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Import the <em>a380-stabilizer.brep</em> file which is in your home folder.</li>
+<p><strong>File &gt; Import &gt; BREP</strong></p>
+
+<li>Zoom on the imported geometry.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/fit-icon.png"/> in the 3D window toolbar</strong></p>
+
+<li>Hide the trihedron.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/trihedron-icon.png"/> in the 3D window toolbar</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_3_2_1.png"/></p>
+
+</ol>
+<h4 id="explode">Explode Sub-Faces &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Get all sub-faces from the imported geometry.</li>
+<p><strong>Select "a380-stabilizer.brep_1"</strong> &#8594; <strong>New Entity &gt; Explode</strong> &#8594;</p>
+<p><strong>Set "Sub-shapes Type" to "Face"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show only the exploded faces.</li>
+<p><strong>Select "a380-stabilizer.brep_1"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+</ol>
+<h4 id="sets">Create Spline Sets &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Show only the faces at the tip of the geometry, like indicated in the following picture.</li>
+<p><strong>Select the faces indicated in the following picture</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+<p><img alt="picture" src="../pictures/tuto_3_2_2.png"/></p>
+
+<li>Hide the face closing the geometry tip.</li>
+<p><strong>Select the face indicated in the following picture</strong> &#8594; <strong>Right-click &gt; Hide</strong></p>
+<p><img alt="picture" src="../pictures/tuto_3_2_3.png"/></p>
+
+<li>Create spline sets on each visible face.</li>
+<p><strong>Select all visible faces</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">RebuildFace( dim = 1 )</p>
+<p><strong>or:</strong></p>
+<p class="code">rf( dim = 1 )</p>
+
+<li>Show only the spline sets, using different colors.</li>
+<p><strong>Select all "RebuildFace (Edges)_*" shapes</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+<p><strong>Select all "RebuildFace (Edges)_*" shapes</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">SetRandomColors( )</p>
+<p><strong>or:</strong></p>
+<p class="code">src( )</p>
+
+<p><img alt="picture" src = "../pictures/tuto_3_2_4.png"/></p>
+
+</ol>
+<h4 id="fuse">Fuse Spline Sets &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Fuse the indicated spline sets.</li>
+<p><strong>Select the spline sets indicated in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_3_2_5.png"/></p>
+<p><strong>Type in the Python console:</strong></p>
+<p class="code">FuseSplineSets( )</p>
+<p><strong>or:</strong></p>
+<p class="code">fss( )</p>
+
+<li>Hide fused spline sets.</li>
+<p><strong>Select the spline sets which were fused (eg. like in the previous picture)</strong> &#8594; <strong>Right-click &gt; Hide</strong></p>
+
+<li>Fuse the last resulting shape ("FusedSplineSets_1") with the indicated spline set.</li>
+<p><strong>Select the last resulting shape (eg. "FusedSplineSets_1") as well as the spline set indicated in yellow in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_3_2_6.png"/></p>
+<p><strong>Type in the Python console:</strong></p>
+<p class="code">FuseSplineSets( )</p>
+<p><strong>or:</strong></p>
+<p class="code">fss( )</p>
+
+<li>Repeat steps 6 and 7 to fuse the last resulting shape ("FusedSplineSets_2") with the spline set indicated in green in the previous picture, 
+using this time 200 points to fuse splines and a tolerance of 1e-4:</li>
+<p class="code">FuseSplineSets( <em>np = 200</em>, <em>tol = 1e-4</em> )</p>
+<p><strong>or:</strong></p>
+<p class="code">fss( <em>np = 200</em>, <em>tol = 1e-4</em> )</p>
+
+<li>Show only the last resulting shape.</li>
+<p><strong>Select "FusedSplineSets_3"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+</ol>
+<h4 id="face">Build a New Face &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a vertex at a corner of this spline set.</li>
+<p><strong>New Entity &gt; Basic &gt; Point</strong> &#8594; <strong>Select the vertex visible in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_3_2_7.png"/></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Create a new face from this spline set, starting from the spline touching the newly created vertex.</li>
+<p><strong>Select both "FusedSplineSets_3" and "Vertex_1" together</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">MakeFillingFromUnsortedEdges( )</p>
+<p><strong>or:</strong></p>
+<p class="code">mffue( )</p>
+
+</ol>
+<h4 id="compare">Compare Geometries &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Show only the input geometry and the rebuilt face ("FillingFromUnstortedEdges_1"), in shading mode and with different colors.</li>
+<p><strong>Select "a380-nose.brep_1" and "FillingFromUnstortedEdges_1"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+<p><strong>Select "a380-nose.brep_1" and "FillingFromUnstortedEdges_1"</strong> &#8594; <strong>Right-click in the 3D window &gt; Display Mode &gt; Shading</strong></p>
+<p><strong>Select "a380-nose.brep_1" and "FillingFromUnstortedEdges_1"</strong> &#8594; <strong>Type in the Python console:</strong></p>
+<p class="code">SetRandomColors( )</p>
+<p><strong>or:</strong></p>
+<p class="code">src( )</p>
+
+<p><img alt="picture" src = "../pictures/tuto_3_2_8.png"/></p>
+<p><img alt="picture" src="../pictures/tuto_3_2_9.png"/></p>
+
+<p>You can close this study.</p>
+
+</ol>
+
+<p><a href="tuto_3_3.html">NEXT STEP</a></p>
+
+<p><a href="tuto_3_1.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_3_3.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tuto_3.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

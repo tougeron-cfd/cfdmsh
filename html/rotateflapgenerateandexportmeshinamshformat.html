@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			RotateFlapGenerateAndExportMeshInAmshFormat - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="makevertexesfrommeshgroup.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="viscouslayerscalefactor.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>RotateFlapGenerateAndExportMeshInAmshFormat</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Rotates a flap, generates a mesh and exports it into an .amsh file readable with <a href="http://www.foi.se/edge">Edge</a> 5.0.0.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>This function is an example of possible highly custom function easy to develop. Any user is invited to study it so as to develop one's own
+"cfdmsh-like" functions.</p>
+
+<p>In this case, for each angle given by the user, the function rotates a flap face and surrounding edges, then cuts
+ a domain face with the flap face and 
+partitions it with the flap edges and the "fixed edges" given by the user. Once 
+the partition is generated, groups are imported from a group file 
+previously generated thanks to the 
+<a href="exportgeometricalgroups.html">ExportGeometricalGroups</a> function. Then, a mesh is created 
+and a mesh configuration is imported from a mesh file generated thanks to the 
+<a href="exportmeshconfiguration.html">ExportMeshConfiguration</a> function.
+Once computed, the mesh is exported thanks to the 
+<a href="exportamshfile.html">ExportAmshFile</a> function.</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+
+
+<p class="code">def RotateFlapGenerateAndExportMeshInAmshFormat( angles, group_file = "cfdmsh_grps", mesh_file = "cfdmsh_msh", domain = "domain", fixed_edges = "fixedEdges", rotating_face = "rotatingFace", rotating_edges = "rotatingEdges", flap_axis = "flapAxis", keep_mesh = True, help = False ):</p>
+
+
+
+<p><img alt="picture" src = "../pictures/rotateflapgenerateandexportmeshinamshformat5.jpg" alt = "rotateflapgenerateandexportmeshinamshformat5.jpg"/></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>angles</em></td>
+<td>The list of flap angles to compute</td>
+<td><strong>List</strong> of <strong>Floats</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><em>group_file</em></td>
+<td>The name of the group file to import in the final partitions.</td>
+<td><strong>String</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><em>"cfdmsh_grps"</em></td>
+</tr>
+
+<tr>
+<td><em>mesh_file</em></td>
+<td>The name of the mesh file to import in the meshes.</td>
+<td><strong>String</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><em>"cfdmsh_msh"</em></td>
+</tr>
+
+<tr>
+<td><em>domain</em></td>
+<td>The face describing the domain before cutting the flap face.</td>
+<td><strong>Face</strong></td>
+<td>-</td>
+<td>yes</td>
+<td>-</td>
+<td><em>"domain"</em></td>
+</tr>
+
+<tr>
+<td><em>fixed_edges</em></td>
+<td>The compound of edges which won't move with the flap.</td>
+<td><strong>Compound</strong> of <strong>Edges</strong></td>
+<td>-</td>
+<td>yes</td>
+<td>-</td>
+<td><em>"fixed_edges"</em></td>
+</tr>
+
+<tr>
+<td><em>rotating_face</em></td>
+<td>The face describing the flap.</td>
+<td><strong>Face</strong></td>
+<td>-</td>
+<td>yes</td>
+<td>-</td>
+<td><em>"rotating_face"</em></td>
+</tr>
+
+<tr>
+<td><em>rotating_edges</em></td>
+<td>The compound of edges which move with the flap.</td>
+<td><strong>Compound</strong> of <strong>Edges</strong></td>
+<td>-</td>
+<td>yes</td>
+<td>-</td>
+<td><em>"rotating_edges"</em></td>
+</tr>
+
+<tr>
+<td><em>flap_axis</em></td>
+<td>The axis of the flap rotation.</td>
+<td><strong>Edge</strong></td>
+<td>-</td>
+<td>yes</td>
+<td>-</td>
+<td><em>"flap_axis"</em></td>
+</tr>
+
+<tr>
+<td><em>keep_mesh</em></td>
+<td>If equals True, meshes are not cleared after each mesh export.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>help</em></td>
+<td>This argument is passed to the <a href="exportamshfile.html">ExportAmshFile</a> function.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+</table>
+
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p><img alt="picture" src="../pictures/rotateflapgenerateandexportmeshinamshformat10.jpg" alt="rotateflapgenerateandexportmeshinamshformat10.jpg"/></p>
+<p><img alt="picture" src="../pictures/rotateflapgenerateandexportmeshinamshformat20.jpg" alt="rotateflapgenerateandexportmeshinamshformat20.jpg"/></p>
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>To use this function, the group file and mesh file have to be previously generated manually and the hypotheses
+to be used in the mesh have to be present in the study.</p>
+
+<p><a href="makevertexesfrommeshgroup.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="viscouslayerscalefactor.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

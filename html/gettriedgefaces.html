@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			GetTriangleGroups - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="getboundaryfaces.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="rebuildspline.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>GetTriEdgeFaces</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Get all the surfaces having three edges and put them in separated groups.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>-</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">def GetTriEdgeFaces( shape = None , tol = 1e-7 , add = True ):</p>
+
+ 
+
+<p><img alt="picture" src = "../pictures/gettriedgefaces_1.png"/></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>shape</em></td>
+<td>The shape in which to look for tri-edge faces.</td>
+<td>Any geometrical object</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>None</td>
+</tr>
+
+<tr>
+<td><em>tol</em></td>
+<td>See <a href="commonarguments.html#tol">here</a>.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>1e-7</td>
+</tr>
+
+<tr>
+<td><em>add</em></td>
+<td>See <a href="commonarguments.html#add">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>-</td>
+<td>-</td>
+<td><strong>Group</strong> of <strong>Faces</strong></td>
+<td>n</td>
+<td><em>"TriEdgeFace"</em></td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+box = geompy.MakeBoxDXDYDZ(100, 100, 100)<br/>
+<br/>
+vertex1 = geompy.MakeVertex(0, 100, 100)<br/>
+vertex2 = geompy.MakeVertex(100, 0, 100)<br/>
+vertex3 = geompy.MakeVertex(100, 0, 0)<br/>
+<br/>
+plane = geompy.MakePlaneThreePnt(vertex1, vertex2, vertex3, 300)<br/>
+<br/>
+partition = geompy.MakePartition([box], [plane])<br/>
+AddToStudy(partition, "partition")<br/>
+<br/>
+<em>tri_edge_faces = GetTriEdgeFaces(partition)</em><br/>
+</p>
+
+ 
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>-</p>
+
+<p><a href="getboundaryfaces.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="rebuildspline.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

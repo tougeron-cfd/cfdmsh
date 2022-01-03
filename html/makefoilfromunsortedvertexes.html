@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			MakeFoilFromUnsortedVertexes - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="makefillingfromunsortededges.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="makeedgeoffset.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>MakeFoilFromUnsortedVertexes</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Makes a foil wire from an unsorted compound of vertexes.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>This function first looks for a feature angle, then tries to find the 
+nearby vertex giving the smoother transition, and so on.</p>
+
+<p>The resulting shape is a wire made of smooth edges separated at feature angles.</p>
+
+<p>This function is particularly useful when the foil is imported as a set of unsorted nodes,
+which can not be reorganized according to their proximity because of the narrowness of the trailing edge.</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+
+
+<p class="code">def MakeFoilFromUnsortedVertexes( compound = None, coef = 1.5, coef2 = 0.02, strat = "grow", poly = False, angle = 60, add = True, infa = False ):</p>
+
+
+
+<p><img alt="picture" src = "../pictures/foilfromunsortedvertexes_1.png"/></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>compound</em></td>
+<td>The compound of vertexes describing the foil.</td>
+<td><strong>List</strong> of<br/> 1 <strong>Compound</strong> of <strong>Vertexes</strong><br/> + 1 <strong>Vertex</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>-</td>
+<td>[None]</td>
+</tr>
+
+<tr>
+<td><em>coef</em></td>
+<td>Coefficient influencing the search distance:<br/> search_distance = coef * mean_distance_between_vertexes</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>1.5</td>
+</tr>
+
+<tr>
+<td><em>coef2</em></td>
+<td>When the foil curvature is very low, some vertexes can be skipped.<br/>
+This coefficient has an influence on skipped vertex detection. Lower it is, finer is the detection.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>0.02</td>
+</tr>
+
+<tr>
+<td><em>strat</em></td>
+<td>The search distance strategy.<br/>
+If equals <em>"grow"</em>, the search distance 
+increases until at least one nearby vertex is seen.<br/>
+If equals <em>"stop"</em>, the algorithm stops when no nearby vertex 
+is seen within the search distance.</td>
+<td><strong>String</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><em>"grow"</em></td>
+</tr>
+
+<tr>
+<td><em>poly</em></td>
+<td>If True, the output wire is made of straights edges.<br/>
+If False, the output wire is made of smooth edge.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td><em>angle</em></td>
+<td>The feature angle in degrees.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>60</td>
+</tr>
+
+<tr>
+<td><em>add</em></td>
+<td>See <a href="commonarguments.html#add">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>infa</em></td>
+<td>See <a href="commonarguments.html#infa">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>-</td>
+<td>-</td>
+<td><strong>Wire</strong></td>
+<td>1</td>
+<td><em>"FoilFromUnsortedVertexes"</em></td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+vertex1 = geompy.MakeVertex(0, 0.1, 0)<br/>
+vertex2 = geompy.MakeVertex(-0.1, 0, 0)<br/>
+vertex3 = geompy.MakeVertex(0, -0.1, 0)<br/>
+vertex4 = geompy.MakeVertex(1, 0, 0)<br/>
+<br/>
+arc = geompy.MakeArc(vertex1, vertex2, vertex3)<br/>
+edge1 = geompy.MakeEdge(vertex1, vertex4)<br/>
+edge2 = geompy.MakeEdge(vertex3, vertex4)<br/>
+<br/>
+vertexes1 = RebuildSpline(10, arc, dim = 0, single = False, add = False)<br/>
+vertexes2 = RebuildSpline(30, edge1, dim = 0, single = False, add = False)<br/>
+vertexes3 = RebuildSpline(30, edge2, dim = 0, single = False, add = False)<br/>
+<br/>
+vertex_compound = geompy.MakePartition(vertexes1 + vertexes2 + vertexes3)<br/>
+AddToStudy(vertex_compound, "compound")<br/>
+<br/>
+<em>foil_wire = MakeFoilFromUnsortedVertexes(vertex_compound)</em><br/>
+</p>
+
+
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The input vertex compound must be planar.</p>
+
+<p><a href="makefillingfromunsortededges.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="makeedgeoffset.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

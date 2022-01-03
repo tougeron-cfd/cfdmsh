@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Preliminary Tutorial - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tutorials.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<h2>Preliminary Tutorial</h2>
+
+<p><img alt="picture" class="shadow" src="../pictures/pretuto.png"/></p>
+
+<p>The purpose of this tutorial is to give basic knowledge about the manipulatio of the Salome GUI as well as 
+to give example of fast interaction with its Python console thanks to cfdmsh.</p>
+
+<p>The following cfdmsh functions will be used:</p>
+
+<ul>
+	<li><a href="printdefinedfunctions.html">PrintDefinedFunctions</a></li>
+	<li><a href="getguiselection.html">GetGUISelection</a></li>
+	<li><a href="getsubshapes.html">GetSubShapes</a></li>
+	<li><a href="addtostudy.html">AddToStudy</a></li>
+</ul>
+
+<p><strong>NB:</strong> This tutorial was tested on Salome 7.7.1 on Linux with the following settings:</p>
+<p><strong>File &gt; Preferences... &gt; Geometry &gt; Default display mode &gt; Wireframe</strong>.</p>
+<p><strong>File &gt; Preferences... &gt; Geometry &gt; Hide input objects from viewer &gt; OFF</strong>.</p>
+
+<p>Content of this mini-tutorial:</p>
+
+<div class="content">
+
+<ul>
+<li><strong><a href="#open">Open a New Study</a></strong></li>
+<li><strong><a href="#3d">Manipulate the 3D Window</a></strong></li>
+<li><strong><a href="#load">Load Cfdmsh</a></strong></li>
+<li><strong><a href="#python">Interact With the Python Console</a></strong></li>
+</ul>
+
+</div>
+
+<h4 id="open">Open a New Study &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Open Salome.</li>
+
+<li>Open a new study.</li>
+<p><strong>File &gt; New</strong></p>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Expand the Geometry node in the study tree.</li>
+<p><img alt="picture" src="../pictures/tuto_1_1_1.png"/></p>
+
+</ol>
+<h4 id="3d">Manipulate the 3D Window &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a cube.</li>
+<p><strong>New Entity &gt; Primitives &gt; Box</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<p><img alt="picture" src="../pictures/pretuto_1.png"/></p>
+
+<li>Get comfortable with the 3D window:</li>
+<table class="arguments">
+	<tr>
+		<th>Action</th>
+		<th>Keys</th>
+	</tr>
+	<tr>
+		<td>Zoom</td>
+		<td><strong>[Ctrl] + Left button</strong></td>
+	</tr>
+	<tr>
+		<td>Rotate</td>
+		<td><strong>[Ctrl] + Right button</strong></td>
+	</tr>
+	<tr>
+		<td>Rotate perpendicular to the screen</td>
+		<td><strong>[Ctrl] + Right button far from the center of the 3D window</strong></td>
+	</tr>
+	<tr>
+		<td>Pan</td>
+		<td><strong>[Ctrl] + Middle button</strong></td>
+	</tr>
+</table>
+
+<li>Explode this cube into sub-faces.</li>
+<p><strong>Select "Box_1"</strong> &#8594; <strong>New Entity &gt; Explode</strong> &#8594;</p>
+<p><strong>Set "Sub-shapes Type" to "Face"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show only the exploded faces.</li>
+<p><strong>Select "Box_1"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<li>Get comfortable with the 3D window selection:</li>
+<table class="arguments">
+	<tr>
+		<th>Action</th>
+		<th>Keys</th>
+	</tr>
+	<tr>
+		<td>Select one entity</td>
+		<td><strong>Left button</strong></td>
+	</tr>
+	<tr>
+		<td>Select several entities</td>
+		<td>
+			<strong>[Shift] + Left button * n</strong>
+			<br/>or<br/>
+			<strong>Left button + drag</strong>
+			<br/>or<br/>
+			<strong>Right button [+ drag + Left button] * n</strong>
+		</td>
+	</tr>
+</table>
+
+<p>
+
+</ol>
+<h4 id="load">Load Cfdmsh &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Load the cfdmsh library.</li>
+<p><strong>[Ctrl] + [T]</strong> &#8594; <strong>Select the "cfdmsh.py" file on your computer</strong></p>
+
+<li>Display all implemented cfdmsh functions.</li>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">PrintDefinedFunctions( )</p>
+<p><strong>or:</strong></p>
+<p class="code">pdf( )</p>
+
+<li>You can also display them in condensed mode:</li>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">PrintDefinedFunctions( <em>1</em> )</p>
+<p><strong>or:</strong></p>
+<p class="code">pdf( <em>1</em> )</p>
+
+<li>Display the help documentation for the function RebuildFace.</li>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">help( RebuildFace )</p>
+<p><strong>or:</strong></p>
+<p class="code">help( rf )</p>
+
+</ol>
+<h4 id="python">Interact With the Python Console &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Put the cube in a python variable called "box".</li>
+<p><strong>Select "Box_1"</strong> &#8594; <strong>In the Python console, type:</strong></p>
+<p class="code">box = GetGUISelection( )</p>
+<p><strong>or:</strong></p>
+<p class="code">box = ggs( )</p>
+
+<li>Display all methods associated to this shape.</li>
+<p><strong>In the Python console, type this without pressing [Return]:</strong></p>
+<p class="code">box.Get</p>
+<p>&#8594; <strong>press [Tab]  &#8594; Scroll down your Python console using your mouse wheel</strong></p>
+
+<p><img alt="picture" src="../pictures/pretuto_2.png"/></p>
+
+<li>Get all sub-solids, sub-faces and sub-vertexes of the box in one command.</li>
+<p><strong>In the Python console, type [Esc], then:</strong></p>
+<p class="code">sub_shapes = GetSubShapes( box )</p>
+<p><strong>or:</strong></p>
+<p class="code">sub_shapes = gss( box )</p>
+
+<p>The object returned by the GetSubShapes function is a list organized as following:</p>
+<table class="arguments">
+	<tr>
+		<th>Variable</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>sub_shapes[<strong>0</strong>]</td>
+		<td>List of <strong>0</strong>D sub-shapes (vertexes)</td>
+	</tr>
+	<tr>
+		<td>sub_shapes[<strong>1</strong>]</td>
+		<td>List of <strong>1</strong>D sub-shapes (edges)</td>
+	</tr>
+	<tr>
+		<td>sub_shapes[<strong>2</strong>]</td>
+		<td>List of <strong>2</strong>D sub-shapes (faces)</td>
+	</tr>
+	<tr>
+		<td>sub_shapes[<strong>3</strong>]</td>
+		<td>List of <strong>3</strong>D sub-shapes (volumes)</td>
+	</tr>
+	<tr>
+		<td>sub_shapes[<strong>-1</strong>]</td>
+		<td>The main shape itself (here, the box)</td>
+	</tr>
+</table>
+
+<li>Publish all sub-vertexes in the Salome study.</li>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">AddToStudy( sub_shapes[0] )</p>
+<p><strong>or:</strong></p>
+<p class="code">ats( sub_shapes[0] )</p>
+
+<p><img alt="picture" src = "../pictures/pretuto_3.png"/></p>
+
+<li>Publish all sub-edges in the Salome study, calling them "Edge".</li>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">AddToStudy( sub_shapes[1], "Edge" )</p>
+<p><strong>or:</strong></p>
+<p class="code">ats( sub_shapes[1], "Edge" )</p>
+
+<p><img alt="picture" src = "../pictures/pretuto_4.png"/></p>
+<p><img alt="picture" src="../pictures/pretuto_5.png"/></p>
+
+<p>You can close this study.</p>
+
+</ol>
+
+<p>END OF THIS TUTORIAL</p>
+
+<p><a href="tutorials.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

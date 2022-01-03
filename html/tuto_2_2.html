@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Create the blocking - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tuto_2.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="tuto_2_1.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_2_3.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Tutorial 2</h2>
+
+<h3>Create the Tip Blocking &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><a href="#create_3d">Create the 3D Wing Tip Blocking</a></li>
+<li><a href="#extend_3d">Extend the 3D Wing Tip Blocking</a></li>
+<li><a href="#final">Create the Final 3D Blocking Object</a></li>
+</ul>
+
+</div>
+
+<h4 id="create_3d">Create the 3D Wing Tip Blocking &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Explode from the linking solids sub-edges close to the wing tip.</li>
+<p><strong>Select "LinkingSolids_1"</strong> &#8594; <strong>New Entity &gt; Explode</strong> &#8594;</p>
+<p><strong>Set "Sub-shapes Type" to "Edge"</strong> &#8594; <strong>Activate the "Select Sub-shapes" option</strong> &#8594;</p>
+<p><strong>Select the edges like in the following picture</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_1_12.png"/></p>
+
+<li>Show only the exploded edges.</li>
+<p><strong>Select "LinkingSolids_1"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<li>Get the name on the upper offset edge (eg. "Edge_20").</li>
+<p><img alt="picture" src="../pictures/tuto_2_1_13.png"/></p>
+
+<li>Make a 3D viscous layer block having a thickness of 3cm on the wing tip upper edge.</li>
+<p><strong>Select the wing tip upper edge like in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_2_1_13-2.png"/></p>
+<p><strong>Type in the Python console (replacing "Edge_20" with the suitable name):</strong></p>
+<p class="code">MakeTipViscousLayer( 0.03, "Edge_20" )</p>
+<p><strong>or:</strong></p>
+<p class="code">mtvl( 0.03, "Edge_20" )</p>
+
+<p><img alt="picture" src = "../pictures/tuto_2_1_14.png"/></p>
+
+<li>Repeat this process to create a 3D viscous layer block on the wing tip lower edge.</li>
+
+<li>Show once again only the previously exploded edges.</li>
+<p><strong>Select "LinkingSolids_1"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<li>Create a face from the wing tip.</li>
+<p><strong>Select the following three edges</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_2_1_15.png"/></p>
+<p><strong>New Entity &gt; Build &gt; Face</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_1_16.png"/></p>
+
+<li>Extrude the wing tip face 3cm following Z.</li>
+<p><strong>Select the wing tip face ("Face_1")</strong> &#8594;</p>
+<p><strong>New Entity &gt; Generation &gt; Extrusion</strong> &#8594; <strong>Select the <img alt="picture" class="button" src="../pictures/dxdydz_extrude-icon.png"/> icon</strong> &#8594;</p>
+<p><strong>Set "Dz" to 0.03"</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_1_17.png"/></p>
+
+<li>Put all tip viscous layer volumes into a compound.</li>
+<p><strong>Select "TipViscousLayer_1" and "TipViscousLayer_2" + "Extrusion_1"</strong> &#8594;</p>
+<p><strong>New Entity &gt; Build &gt; Compound</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Show only this compound.</li>
+<p><strong>Select "Compound_2"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_1_18.png"/></p>
+
+</ol>
+<h4 id="extend_3d">Extend the 3D Wing Tip Blocking &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a face group on the compound containing trailing its faces.</li>
+<p><strong>Select "Compound_2"</strong> &#8594; <strong>New Entity &gt; Group &gt; Create Group</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/face_group-icon.png"/> icon</strong> &#8594; <strong>Select the following faces</strong> &#8594; <strong>Click on "Add"</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_2_1_19.png"/></p>
+<p><strong>Apply and Close</strong></p>
+
+<li>Show again only the linking solid sub-edges.</li>
+<p><strong>Select "LinkingSolids_1"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<li>Create a compound from edges being behind the wing tip trailing edge.</li>
+<p><strong>Select the edges like in the following picture</strong> &#8594;</p>
+<p><img alt="picture" src="../pictures/tuto_2_1_20.png"/></p>
+<p><strong>New Entity &gt; Build &gt; Compound</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Extend the 3D tip viscous layer.</li>
+<p><strong>Select the face group "Group_3" and the edge compound "Compound_3"</strong> &#8594;</p>
+<p><strong>Type in the Python console:</strong></p>
+<p class="code">ExtendTipViscousLayer( )</p>
+<p><strong>or:</strong></p>
+<p class="code">etvl( )</p>
+
+</ol>
+<h4 id="final">Create the Final 3D Blocking Object &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Put all 3D blocks in a single compound.</li>
+<p><strong>Select the "LinkingSolids_1", "Compound_2" and "TipViscousLayerExtension_1"</strong> &#8594;</p>
+<p><strong>New Entity &gt; Build &gt; Compound</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Progressively "glue" faces inside this compound.</li>
+<p><strong>Select the "Compound_4"</strong> &#8594; <strong>Repair &gt; Glue Faces</strong> &#8594; <strong>Apply</strong> &#8594;</p>
+<p><strong>Select the "Glue_1"</strong> &#8594; <strong>Set "Tolerance" to 1e-6</strong> &#8594; <strong>Apply</strong> &#8594;</p>
+<p><strong>Select the "Glue_2"</strong> &#8594; <strong>Set "Tolerance" to 1e-5</strong> &#8594; <strong>Apply</strong> &#8594;</p>
+<p><strong>Select the "Glue_3"</strong> &#8594; <strong>Set "Tolerance" to 1e-4</strong> &#8594; <strong>Apply</strong> &#8594;</p>
+<p><strong>Select the <img alt="picture" class="button" src="../pictures/glue_faces-icon.png"/> icon</strong> &#8594; <strong>Set "Tolerance" to 1e-3</strong> &#8594;</p>
+<p><strong>Click on "Detect [Glue faces]"</strong> &#8594; <strong>Check there is no face to glue</strong> &#8594; <strong>Close</strong></p>
+
+<li>Show only the final blocking and display it in shading mode.</li>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>Right-click &gt; Show Only</strong></p>
+<p><strong>Select "Glue_4"</strong> &#8594; <strong>Right-click in the 3D window &gt; Display Mode &gt; Shading With Edges</strong></p>
+
+<p><img alt="picture" src="../pictures/tuto_2_1_21.png"/></p>
+
+</ol>
+
+<p><a href="tuto_2_3.html">NEXT STEP</a></p>
+
+<p><a href="tuto_2_1.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tuto_2_3.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tuto_2.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

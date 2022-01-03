@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			MakeEllipticalFilling - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="makecurvefromunsortedvertexes.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="makefillingfromunsortededges.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>MakeEllipticalFilling</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Creates a filling face having all its section being elliptical.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>If the parallel argument equals True, the function creates a plane 
+using the start vertexes of the source edges, then translates 
+this plane so as to cut them at several positions. Else, each source edge 
+is cut using a position parameter on it. At each position, an arc of ellipse 
+is created using the center and guiding vertexes. Finally, a filling surface 
+is made from these arcs of ellipse.</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+
+<p class="code">def MakeEllipticalFilling( center, guides = [None], np = 20, parallel = False, single = True, add = True, dim = 2 ):</p>
+
+ 
+
+<p><img alt="picture" src = "../pictures/makeellipticalfilling_1.png"/></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>center</em></td>
+<td>The central edge of the elliptical filling.</td>
+<td><strong>Edge</strong></td>
+<td>-</td>
+<td>yes</td>
+<td>-</td>
+<td>None</td>
+</tr>
+
+<tr>
+<td><em>guides</em></td>
+<td>The guiding edges.</td>
+<td><strong>List</strong> of 2 <strong>Edges</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>-</td>
+<td>[None]</td>
+</tr>
+
+<tr>
+<td><em>np</em></td>
+<td>See <a href="commonarguments.html#np">here</a>.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>10</td>
+</tr>
+
+<tr>
+<td><em>parallel</em></td>
+<td>If equals True, the elliptical sections of the filling are forced to be parallel.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td><em>single</em></td>
+<td>See <a href="commonarguments.html#single">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>add</em></td>
+<td>See <a href="commonarguments.html#add">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>dim</em></td>
+<td>See <a href="commonarguments.html#dim">here</a>.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>2</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>False</td>
+<td><strong>Edge</strong></td>
+<td>n</td>
+<td><em>"EllipticalFilling (Edge)"</em></td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>True</td>
+<td><strong>Compound</strong> of <strong>Edges</strong></td>
+<td>1</td>
+<td><em>"EllipticalFilling (Edges)"</em></td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>-</td>
+<td><strong>Face</strong></td>
+<td>1</td>
+<td><em>"EllipticalFilling"</em></td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+vertex_1 = geompy.MakeVertex(0, 0, 0)<br/>
+vertex_2 = geompy.MakeVertex(300, 0, 0)<br/>
+vertex_3 = geompy.MakeVertex(0, -150, 0)<br/>
+vertex_4 = geompy.MakeVertex(100, -250, 0)<br/>
+vertex_5 = geompy.MakeVertex(200, -100, 0)<br/>
+vertex_6 = geompy.MakeVertex(300, -150, 0)<br/>
+vertex_7 = geompy.MakeVertex(0, 0, 200)<br/>
+vertex_8 = geompy.MakeVertex(100, 0, 150)<br/>
+vertex_9 = geompy.MakeVertex(200, 0, 200)<br/>
+vertex_10 = geompy.MakeVertex(300, 0, 150)<br/>
+edge = geompy.MakeEdge(vertex_1, vertex_2)<br/>
+curve_1 = geompy.MakeInterpol([vertex_3, vertex_4, vertex_5, vertex_6], False, False)<br/>
+curve_2 = geompy.MakeInterpol([vertex_7, vertex_8, vertex_9, vertex_10], False, False)<br/>
+<br/>
+AddToStudy(edge, "center")<br/>
+AddToStudy([curve_1, curve_2], "guide")<br/>
+<br/>
+<em>elliptical_filling = MakeEllipticalFilling(edge, [curve_1, curve_2])</em><br/>
+<em>elliptical_filling_edges = MakeEllipticalFilling(edge, [curve_1, curve_2], dim = 1)</em><br/>
+</p>
+
+
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Triangles formed by vertexes taken at a same position on the center and guiding edges should be always rectangle.</p>
+
+<p><a href="makecurvefromunsortedvertexes.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="makefillingfromunsortededges.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

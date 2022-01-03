@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			MakeTipViscousLayer - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="propagateviscouslayerintersection.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="extendtipviscouslayer.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>MakeTipViscousLayer</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Creates a tip viscous layer volume following a foil edge.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>First, a quadrangle face is created from the input edges. The normal of this face 
+gives the viscous layer direction. Then, for each position on the input edges, filling 
+edges are created between the foil edge and the offset edge, and between 
+the foil edge and the tip viscous layer top edge. Also, boundary faces are created.
+Once done, filling faces are created and the foil edge is extruded. All the faces 
+are then put into a compound of which edges are glued. Finally, a shell, and then 
+a solid is created from this compound.</p>
+
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">def MakeTipViscousLayer( dist, offset, foil = None, style = "smooth", np = 40, curv = True, tol = 1e-4, by_param = False, rev = False, add = True, infa = False, dim = 3 ):</p>
+
+ 
+
+<p><img alt="picture" src = "../pictures/maketipviscouslayer_1.png"/></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>dist</em></td>
+<td>The offset distance normal to the wing tip.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><em>offset</em></td>
+<td>The edge describing the offset of the viscous layer in the wing tip plane.</td>
+<td><strong>Edge</strong></td>
+<td>-</td>
+<td>yes</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><em>foil</em></td>
+<td>The edge touching the wing tip.</td>
+<td><strong>Edge</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>-</td>
+<td>None</td>
+</tr>
+
+<tr>
+<td><em>style</em></td>
+<td>See <a href="commonarguments.html#style">here</a>.</td>
+<td><strong>String</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><em>"smooth"</em></td>
+</tr>
+
+<tr>
+<td><em>np</em></td>
+<td>See <a href="commonarguments.html#np">here</a>.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>40</td>
+</tr>
+
+<tr>
+<td><em>curv</em></td>
+<td>See <a href="commonarguments.html#curv">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>tol</em></td>
+<td>See <a href="commonarguments.html#tol">here</a>.</td>
+<td><strong>Float</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>1e-4</td>
+</tr>
+
+<tr>
+<td><em>by_param</em></td>
+<td>Defines if the function has to create two points at the same position 
+on the foil edge and on the offset edge respectively by using a same distance from 
+the edge start (True) or the same parameter on the edge (False). 
+In some cases, switch this parameter can give better results.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td><em>rev</em></td>
+<td>See <a href="commonarguments.html#rev">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td><em>add</em></td>
+<td>See <a href="commonarguments.html#add">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>infa</em></td>
+<td>See <a href="commonarguments.html#infa">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td><em>dim</em></td>
+<td>See <a href="commonarguments.html#dim">here</a>.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>3</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>-</td>
+<td><strong>Compound</strong> of <strong>Edge</strong></td>
+<td>2</td>
+<td><em>"TipViscousLayer (Edges)"</em></td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>-</td>
+<td><strong>Compound</strong> of <strong>Faces</strong></td>
+<td>1</td>
+<td><em>"TipViscousLayer (Faces)"</em></td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>-</td>
+<td><strong>Solid</strong></td>
+<td>1</td>
+<td><em>"TipViscousLayer"</em></td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+vertex1 = geompy.MakeVertex(-50, 200, 0)<br/>
+vertex2 = geompy.MakeVertex(0, 0, 0)<br/>
+vertex3 = geompy.MakeVertex(-75, -100, 0)<br/>
+<br/>
+curve = geompy.MakeInterpol([vertex1, vertex2, vertex3])<br/>
+offset = MakeEdgeOffset(20, curve, close = False, add = False)<br/>
+<br/>
+AddToStudy(curve, "curve")<br/>
+AddToStudy(offset, "offset")<br/>
+<br/>
+<em>tip_viscous_layer = MakeTipViscousLayer(20, curve, offset)</em><br/>
+<em>tip_viscous_layer = MakeTipViscousLayer(20, curve, offset, dim = 1)</em><br/>
+</p>
+
+ 
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The input edges have to be open.</p>
+
+<p><a href="propagateviscouslayerintersection.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="extendtipviscouslayer.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

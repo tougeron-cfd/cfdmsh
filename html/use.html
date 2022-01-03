@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Use - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="installation.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tutorials.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Use</h2>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><strong><a href="#import">Import</a></strong></li>
+<li><strong><a href="#list">Function List</a></strong></li>
+<li><strong><a href="#name">Selection by Name</a></strong></li>
+<li><strong><a href="#selection">GUI selection</a></strong></li>
+<li><strong><a href="#recursivefunctions">Recursive Functions</a></strong></li>
+<li><strong><a href="#acronyms">Acronyms</a></strong></li>
+<li><strong><a href="#completion">Auto-completion</a></strong></li>
+</ul>
+
+</div>
+
+<h3 id="import">Import &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Once installed, the cfdmsh library can be used from 
+the Salome GUI or in any Python script.</p>
+
+<p>In both cases, cfdmsh has to be loaded ("imported") before to use it, each time a new Salome session is opened. 
+The way to proceed depends on the way it was installed.</p>
+
+<h4>Method 1 - a &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<p>If the <a href="installation.html#1">method 1</a> was followed during the installation, the user can type directly in the Python console of Salome or 
+in a Python script:</p>
+
+
+
+<p class="code">import cfdmsh</p>
+
+
+
+<p>and then call any cfdmsh function by typing: <em>cfdmsh.<strong>&lt;function name&gt;</strong>(<strong>&lt;list of arguments&gt;</strong>)</em>. For example:</p>
+
+
+
+<p class="code">cfdmsh.RebuildSpline( 30, 'Edge_1' )</p>
+
+
+
+<p>In this case, it is also possible to have a quick help on a cfdmsh function by typing: <em>help(cfdmsh.<strong>&lt;function name&gt;</strong>)</em>. For example:</p>
+
+
+
+<p class="code">help( cfdmsh.RebuildSpline )</p>
+
+
+
+<h4>Method 1 - b &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h4>
+
+<p>Always after installing cfdmsh using the <a href = "installation.html#1">method 1</a>, the user can also load it typing:</p>
+
+
+
+<p class="code">from cfdmsh import *</p>
+
+
+
+<p>In this case, the user has not anymore to type <em>cfdmsh.</em> before calling 
+a cfdmsh function. For example:</p>
+
+
+
+<p class="code">RebuildSpline( 30, 'Edge_1' )</p>
+
+
+
+<p>And, to have a quick help on a cfdmsh function, the user can type: <em>help(<strong>&lt;function name&gt;</strong>)</em>. For example:</p>
+
+
+
+<p class="code">help( RebuildSpline )</p>
+
+
+
+<h4>Method 2 &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h4>
+
+<p>If the <a href = "installation.html#2">method 2</a> was followed during the installation, 
+the <em>cfdmsh.py</em> file has to be loaded using <strong>File &gt; Load Script</strong> or <strong>[Ctrl]+[T]</strong> 
+or by typing in a Python script: <em>execfile(r"<strong>&lt;cfdmsh.py_path&gt;</strong>")</em>, 
+knowing the path is taken from the user's home folder when the command is executed from the GUI of Salome. For example:</p>
+
+
+
+<p class="code">execfile( r"/home/user/cfdmsh/cfdmsh.py" )</p>
+
+<p>or:</p>
+
+<p class="code">execfile( r"cfdmsh/cfdmsh.py" )</p>
+
+
+<p>Then, the way to call a cfdmsh function 
+is the same as for the method 1-b. That is, by typing: <em><strong>&lt;function name&gt;</strong>(<strong>&lt;list of arguments&gt;</strong>)</em>. For example:</p>
+
+
+
+<p class="code">RebuildSpline( 30, 'Edge_1' )</p>
+
+
+
+<p>And, the command to have a quick help on a cfdmsh function is also the same as for the method 1-b. For example:</p>
+
+
+
+<p class="code">help( RebuildSpline )</p>
+
+
+
+<h3 id="list">Function List &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h3>
+
+<p>Once imported, the list of all implemented cfdmsh functions can be displayed in the Python console typing:</p>
+
+
+
+<p class="code">PrintDefinedFunctions( )</p>
+
+
+
+<p>or, simply:</p>
+
+
+
+<p class="code">pdf( )</p>
+
+
+
+<p>To have a condensed list in alphabetical order, the user can type:</p>
+
+
+
+<p class="code">pdf( 1 )</p>
+
+
+
+<h3 id="name">Selection by Name &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h3>
+
+<h4>In a Python script</h4>
+
+<p>Almost all cfdmsh functions need to be executed using existing objects created in Salome as input arguments (eg. edges, faces, meshes, etc.).</p>
+<p>When cfdmsh is used inside a script, the user can indicate these objects using their name in the script. For example, to fuse two splines 
+<em>Edge_1</em> and <em>Edge_2</em>, the user can type:</p>
+
+
+
+<p class="code">fs( [Edge_1, Edge_2] )</p>
+
+
+
+<h4>From the GUI</h4>
+
+<p>Now, if the user is using cfdmsh from the Salome GUI, he can designate them through their name in the study tree.
+For example, to fuse two splines <em>Edge_1</em> and <em>Edge_2</em>, the user can type:</p>
+
+
+
+<p class="code">fs( ['Edge_1', 'Edge_2'] )</p>
+
+
+
+<p>Notice that the only one difference with the previous example is the presence of brackets around <em>Edge_1</em> and <em>Edge_2</em>.</p>
+
+<h3 id="selection">GUI selection &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>For some functions, input shapes can even be selected in the Salome GUI without giving their name in the Python console.</p>
+
+<p>For example:</p>
+
+
+
+<p class="code">RebuildSpline( 30 )</p>
+
+
+
+<p>will give the same result as:</p>
+
+
+
+<p class="code">RebuildSpline( 30, 'Edge_1' )</p>
+
+
+
+<p>if <em>Edge_1</em> is previously selected in the Salome GUI (eg. by left-clicking on it in the study tree or in the 3D window).</p>
+
+<h3 id="recursivefunctions">Recursive Functions &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Also, some cfdmsh functions, called "recursive", allow their main input shape argument to be an list 
+instead of a single value. For example:</p>
+
+
+
+<p class="code">RebuildSpline( 30, ['Edge_1', 'Edge_2', 'Edge_3'] )</p>
+
+
+
+<p>will give the same result as:</p>
+
+
+
+<p class="code">RebuildSpline( 30, 'Edge_1' )<br/>
+RebuildSpline( 30, 'Edge_2' )<br/>
+RebuildSpline( 30, 'Edge_3' )</p>
+
+
+
+<p>as well as:</p>
+
+
+
+<p class="code">RebuildSpline( 30 )</p>
+
+
+
+<p>if <em>Edge_1</em>, <em>Edge_2</em> and <em>Edge_3</em> are previously selected in the Salome GUI.</p>
+
+<h3 id="acronyms">Acronyms &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>To accelerate the cfdmsh use, all functions 
+can be called using either their full name or their acronym in lower case. For example:</p>
+
+
+
+<p class="code">pvli( 'Compound_1' )</p>
+
+
+
+<p>will give the same result as:</p>
+
+
+
+<p class="code">PropagateViscousLayerIntersection( 'Compound_1' )</p>
+
+
+
+<h3 id="completion">Auto-completion &nbsp;&nbsp;<a href = "#"><img alt="picture" src = "../pictures/up.png"/></a></h3>
+
+<p>Finally, from the version 7.2.0 of Salome, auto-completion is available in its Python console. The cfdmsh user is strongly encouraged to take advantage of this very
+useful tool.</p>
+
+<p>To have an example of auto-completion, the user can load the cfdmsh.py file using <strong>[Ctrl]+[T]</strong> and type:
+
+
+
+<p class="code">Reb</p>
+
+
+
+<p>Then, using the <strong>[Tab]</strong> key should automatically replace <em>Reb</em> with <em>Rebuild</em> and display below in green the 
+different functions beginning with <em>Rebuild</em>.</p>
+
+<p>Typing <em>F</em> and using the <strong>[Tab]</strong> key should replace the line with <em>RebuildFace</em>.</p>
+
+<p>As visible here, auto-completion allows to both accelerate the Python console use and to quickly see available functions.</p>
+
+<p><a href="installation.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="tutorials.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			ExportGeometricalGroups - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="copygeometricalgroups.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="importgeometricalgroups.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>ExportGeometricalGroups</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Exports into a file the geometrical groups of a geometrical object in the form of sets of subshape IDs.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>This function writes in a file the name, type and subshape IDs of each group of a 
+geometrical object. The file can then be imported with the  <a href="importgeometricalgroups.html">ImportGeometricalGroups</a>
+function.</p>
+
+<p>The file appears by default in the home folder.</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">def ExportGeometricalGroups( shape = None, file = "cfdmsh_grps", only = [None], ignore = [None], type = None ):</p>
+
+ 
+
+<p><img alt="picture" src = "../pictures/exportgeometricalgroups_1.png"/></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>shape</em></td>
+<td>The source geometrical object.</td>
+<td><strong>Any geometrical object</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>-</td>
+<td>None</td>
+</tr>
+
+<tr>
+<td><em>file</em></td>
+<td>The name of the file to write.</td>
+<td><strong>String</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><em>"cfdmsh_grps"</em></td>
+</tr>
+
+<tr>
+<td><em>only</em></td>
+<td>The list of names of groups to export, excluding the others.</td>
+<td><strong>List</strong> of <strong>Strings</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>[None]</td>
+</tr>
+
+<tr>
+<td><em>ignore</em></td>
+<td>The list of names of groups to ignore.</td>
+<td><strong>List</strong> of <strong>Strings</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>[None]</td>
+</tr>
+
+<tr>
+<td><em>type</em></td>
+<td>Type of groups to export. Can equal <em>"vertex"</em>, <em>"edge"</em>, <em>"face"</em> or <em>"solid"</em>.</td>
+<td><strong>String</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>None</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+box1 = geompy.MakeBoxDXDYDZ(100, 100, 100)<br/>
+box2 = geompy.MakeBoxDXDYDZ(100, 100, 100)<br/>
+AddToStudy([box1, box2], "Box_1")<br/>
+<br/>
+group1 = geompy.CreateGroup(box1, geompy.ShapeType["VERTEX"])<br/>
+geompy.AddObject(group1, 21)<br/>
+geompy.AddObject(group1, 11)<br/>
+<br/>
+group2 = geompy.CreateGroup(box1, geompy.ShapeType["EDGE"])<br/>
+geompy.AddObject(group2, 5)<br/>
+geompy.AddObject(group2, 18)<br/>
+<br/>
+group3 = geompy.CreateGroup(box1, geompy.ShapeType["FACE"])<br/>
+geompy.AddObject(group3, 3)<br/>
+geompy.AddObject(group3, 33)<br/>
+<br/>
+AddToStudy([group1, group2, group3], "group", father = box1)<br/>
+<br/>
+<em>ExportGeometricalGroups(box1, "group_file_example")</em><br/>
+ImportGeometricalGroups(box2, "group_file_example")<br/>
+</p>
+
+ 
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>-</p>
+
+<p><a href="copygeometricalgroups.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="importgeometricalgroups.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Mini-Tutorial 1 - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="tutorials.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="minituto_3.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="minituto_2.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Mini-Tutorial 1</h2>
+
+<p><img alt="picture" class="shadow" src="../pictures/mini_1.png"/></p>
+
+<p>The purpose of this tutorial is to show how to manage geometrical groups using cfdmsh.</p>
+
+<p>Cfdmsh allows to copy groups between shapes according to their geometrical description or according to 
+their index inside the shape.</p>
+
+<p>The following cfdmsh functions will be used:</p>
+
+<ul>
+	<li><a href="putallsubshapesinagroup.html">PutAllSubShapesInAGroup</a></li>
+	<li><a href="copygeometricalgroups.html">CopyGeometricalGroups</a></li>
+	<li><a href="exportgeometricalgroups.html">ExportGeometricalGroups</a></li>
+	<li><a href="importgeometricalgroups.html">ImportGeometricalGroups</a></li>
+</ul>
+
+<p><strong>NB:</strong> This tutorial was tested on Salome 7.7.1 on Linux with the following settings:</p>
+<p><strong>File &gt; Preferences... &gt; Geometry &gt; Default display mode &gt; Wireframe</strong>.</p>
+<p><strong>File &gt; Preferences... &gt; Geometry &gt; Hide input objects from viewer &gt; OFF</strong>.</p>
+
+<div class="content">
+
+<p>Content of this mini-tutorial:</p>
+
+<ul>
+<li><strong><a href="#open">Open a New Study</a></strong></li>
+<li><strong><a href="#source">Create the Source Cube</a></strong></li>
+<li><strong><a href="#groups">Create Groups</a></strong></li>
+<li><strong><a href="#target">Create the Target Cube</a></strong></li>
+<li><strong><a href="#copy">Copy Groups</a></strong></li>
+<li><strong><a href="#export">Import/Export Groups</a></strong></li>
+</ul>
+
+</div>
+
+<h4 id="open">Open a New Study &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Open Salome.</li>
+
+<li>Open a new study.</li>
+<p><strong>File &gt; New</strong></p>
+
+<li>Load the Geometry module.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/geom-icon.png"/> in the toolbar</strong></p>
+
+<li>Expand the Geometry node in the study tree.</li>
+<p><img alt="picture" src="../pictures/tuto_1_1_1.png"/></p>
+
+<li>Load the cfdmsh library.</li>
+<p><strong>[Ctrl] + [T]</strong> &#8594; <strong>Select the "cfdmsh.py" file on your computer</strong></p>
+
+</ol>
+<h4 id="source">Create the Source Cube &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create a cube.</li>
+<p><strong>New Entity &gt; Primitives &gt; Box</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<li>Hide the trihedron.</li>
+<p><strong>Click on <img alt="picture" class="button" src="../pictures/trihedron-icon.png"/> in the 3D window toolbar</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_1_1.png"/></p>
+
+</ol>
+<h4 id="groups">Create Groups &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Create three groups containing respectively all sub-vertexes, all sub-edges, and all sub-faces of the cube.</li>
+<p><strong>Select "Box_1"</strong> &#8594; <strong>In the Python console, type:</strong></p>
+<p class="code">
+	PutAllSubShapesInAGroup( 0 )<br/>
+	PutAllSubShapesInAGroup( 1 )<br/>
+	PutAllSubShapesInAGroup( 2 )
+</p>
+<p><strong>or:</strong></p>
+<p class="code">
+	passiag( 0 )<br/>
+	passiag( 1 )<br/>
+	passiag( 2 )
+</p>
+
+<li>Expand the "Box_1" node in the study tree to see newly created groups.</li>
+<p><img alt="picture" src="../pictures/mini_1_2-2.png"/></p>
+
+<li>Show only these groups.</li>
+<p><strong>Select "Box_1"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_1_2.png"/></p>
+
+</ol>
+<h4 id="target">Create the Target Cube &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Translate the cube 200m following the X axis.</li>
+<p><strong>Select "Box_1"</strong> &#8594; <strong>Operations &gt; Transformation &gt; Translation</strong> &#8594;</p>
+<p><strong>Set "Dx" to 200</strong> &#8594; <strong>Apply and Close</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_1_3.png"/></p>
+
+</ol>
+<h4 id="copy">Copy Groups &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Copy the groups from the first cube to the other.</li>
+<p><strong>In the Python console, type:</strong></p>
+<p class="code">CopyGeometricalGroups( 'Box_1', 'Translation_1' )</p>
+<p><strong>or:</strong></p>
+<p class="code">cgg( 'Box_1', 'Translation_1' )</p>
+
+<li>Expand the "Translation_1" node in the study tree to see copied groups.</li>
+<p><img alt="picture" src="../pictures/mini_1_2-2.png"/></p>
+
+<li>Show only these groups.</li>
+<p><strong>Select "Translation_1"</strong> &#8594; <strong>Right-click &gt; Show Only Children</strong></p>
+
+<p><img alt="picture" src="../pictures/mini_1_4.png"/></p>
+
+<p>Only sub-shapes from "Box_1" having a sub-shape sharing the same topology in "Translation_1" were copied.</p>
+
+</ol>
+<h4 id="export">Import/Export Groups &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+<ol>
+
+<li>Hide everything in the 3D window</li>
+<p><strong>Right-click in the 3D window &gt; Hide All</strong></p>
+
+<li>Export groups from the source cube into a file.</li>
+<p><strong>Select "Box_1"</strong>  &#8594; <strong>In the Python console, type:</strong></p>
+<p class="code">ExportGeometricalGroups( )</p>
+<p><strong>or:</strong></p>
+<p class="code">egg( )</p>
+
+<p>This command created a file called "cfdmsh_grps" in your home folder.</p>
+
+<li>Import exported groups into the target cube.</li>
+<p><strong>Select "Translation_1"</strong>  &#8594; <strong>In the Python console, type:</strong></p>
+<p class="code">ImportGeometricalGroups( )</p>
+<p><strong>or:</strong></p>
+<p class="code">igg( )</p>
+
+<p><img alt="picture" src = "../pictures/mini_1_5.png"/></p>
+
+<p>This time, the whole groups were copied from "Box_1" to "Translation_1", regardless the change in form or position of their sub-shapes.
+This was possible because both source and target geometries shared the same sub-shape ID organization.</p>
+
+<p>You can close this study.</p>
+
+</ol>
+
+<p>END OF THIS TUTORIAL</p>
+
+<p><a href="minituto_3.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="minituto_2.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="tutorials.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			Installation - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="downloads.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="use.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>Installation</h2>
+
+<p>The first thing to do to use cfdmsh is of course to "install" it, even if 
+"install" is not always a suitable world for this tool.</p>
+
+<p>There are two ways to proceed, depending on the type of installation of 
+Salome itself and the way the user wants to load the cfdmsh library in Salome.</p>
+
+<div class="content">
+
+<p>Content of this section:</p>
+
+<ul>
+<li><strong><a href="#1">Method 1</a></strong></li>
+<li><strong><a href="#2">Method 2</a></strong></li>
+</ul>
+
+</div>
+
+<h3>Installation &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<h4 id="1">Method 1 &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<p>If Salome was installed using the Install Wizard, it is possible 
+to put the <em>cfdmsh.py</em> file into a certain
+Salome folder so as to be able to import it as any other python library from the Python 
+console of Salome or in a Salome Python script.</p>
+
+<p>To do so, just copy the <em>cfdmsh.py</em> file into the following folder, 
+replacing the <em>X</em> characters by the suitable version numbers:</p>
+
+<p><em><strong>&lt;salome folder&gt;</strong>/KERNEL_<strong>&lt;X.X.X&gt;</strong>/lib/python<strong>&lt;X.X&gt;</strong>/site-package/salome/</em></p>
+
+<p>Example: <em>/apl/salome/salome_7.7.1/KERNEL_7.7.1/lib/python2.7/site-packages/salome/</em></p>
+
+<p>Once done, the user should be able to open a Salome study and to type in the Python Console:</p>
+
+
+
+<p class="code">import cfdmsh</p>
+
+
+
+<p>If this command fails, the user should use the second method.</p>
+
+<h4 id="2">Method 2 &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h4>
+
+<p>The second way to install cfdmsh on your computer is to simply 
+put somewhere the <em>cfdmsh.py</em> file (and to remember where)
+so as to be able to load it from the GUI 
+using <strong>File &gt; Load Script</strong> or <strong>[Ctrl]+[T]</strong>.</p>
+
+<p>To access it quickly, the cfdmsh folder can be added to favorite ones from the preferences of Salome, going to: <strong>File &gt; Preferences... &gt; SALOME &gt; Directories</strong>.</p>
+
+<p><img alt="picture" src="../pictures/screenshot_3.png"/></p>
+
+<p><a href="downloads.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="use.html"> <img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="../index.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

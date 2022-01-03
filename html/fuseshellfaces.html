@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			FuseShellFaces - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="fusecoplanarfaces.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="fusegroupfaces.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>FuseShellFaces</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Creates a single face from a shell.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>This function first generates a surface mesh of the input shell, then use mesh nodes to create 
+a "smoothing surface". The last step is to relimitate this surface with the input shell boundary wire.</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">def FuseShellFaces( shell = None, np = 400, strat = "rigid", curv = True, add = True, infa = False, dim = 2 ):</p>
+
+ 
+
+<p><img alt="picture" src = "../pictures/fuseshellfaces_1.png"></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>shell</em></td>
+<td>The shell to fuse.</td>
+<td><strong>Shell</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>[None]</td>
+</tr>
+
+<tr>
+<td><em>np</em></td>
+<td>See <a href="commonarguments.html#np">here</a>.<br/>
+In this case, the number of point is approximatively respected.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>400</td>
+</tr>
+
+<tr>
+<td><em>strat</em></td>
+<td>The strategy. If equals <em>"flex"</em>, the function tries to insert smooth transitions
+between sub-faces of the input shell (the boundary wire is then modified).
+Equals <em>"rigid"</em> otherwise (necessitates the input sub-faces to be 
+as tangential as possible).</td>
+<td><strong>String</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><em>"rigid"</em></td>
+</tr>
+
+<tr>
+<td><em>curv</em></td>
+<td>See <a href="commonarguments.html#curv">here</a>.<br/>
+In this case, applies only for the boundary wire reconstruction when <em>strat</em> equals <em>"flex"</em>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>add</em></td>
+<td>See <a href="commonarguments.html#add">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>infa</em></td>
+<td>See <a href="commonarguments.html#infa">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td>-</td>
+<td><strong>Compound</strong> of <strong>Vertexes</strong></td>
+<td>1</td>
+<td><em>"FusedShell (Vertexes)"</em></td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>-</td>
+<td><strong>Face</strong></td>
+<td>1</td>
+<td><em>"FusedShell"</em></td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+import math<br/>
+<br/>
+vertex_1 = geompy.MakeVertex(0, 0, 0)<br/>
+vertex_2 = geompy.MakeVertex(0, 0, 100)<br/>
+vertex_3 = geompy.MakeVertex(0, -50, 0)<br/>
+arc = geompy.MakeArcOfEllipse(vertex_1, vertex_2, vertex_3)<br/>
+vertex_4 = geompy.MakeVertex(0, -150, 0)<br/>
+vertex_5 = geompy.MakeVertex(0, 50, 0)<br/>
+extrusion_1 = geompy.MakePrismDXDYDZ(vertex_4, 0, 0, 100)<br/>
+extrusion_2 = geompy.MakePrismDXDYDZ(vertex_5, 0, 0, 100)<br/>
+revolution_1 = geompy.MakeRevolution(arc, extrusion_1, 45*math.pi/180.0)<br/>
+revolution_2 = geompy.MakeRevolution(arc, extrusion_2, 45*math.pi/180.0)<br/>
+shell = geompy.MakeShell([revolution_1, revolution_2])<br/>
+<br/>
+AddToStudy(shell, "shell")<br/>
+<br/>
+<em>fused_shell = FuseShellFaces(shell)</em><br/>
+<em>fused_shell_vertexes = FuseShellFaces(shell, dim = 0)</em><br/>
+</p>
+
+ 
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The shell should have only one boundary wire.</p>
+<p>Also, to be fused efficiently, the shell faces should have reasonable aspect ratio and local curvature.</p>
+
+<p><a href="fusecoplanarfaces.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="fusegroupfaces.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>

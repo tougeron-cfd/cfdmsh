@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		
+		<meta HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+		<meta NAME="AUTHOR" CONTENT="William Tougeron">
+		<meta name="DESCRIPTION" content="cfdmsh 4.0 documentation">
+		<meta name="keywords" content="cfdmsh, Salome, CFD, Python"/>
+		<meta name="copyright" content="tougeron-cfd.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="icon" type="image/png" href="../icon.png?v=1"/>
+		
+		<title>
+			
+			MakeVirtualOffsetEdgeSubmeshes - cfdmsh
+			
+		</title>
+		
+	</head>
+	
+	<body LANG="en-US" DIR="LTR">
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p><a href="importcsvfile.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="maketriedgefacesubmeshes.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<h2>MakeVirtualOffsetEdgeSubmeshes</h2>
+
+<h3 id="short_description">Short Description &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>Creates submeshes on an edge group so as to prepare it for automatic viscous layer meshing.</p>
+
+<h3 id="long_description">Additional Information &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>The function explodes first the group into sub-edges and publishes them in the study tree.
+An offset is then created around each sub-edge. This offset is then discretized
+into a set of equidistant nodes, which are then orthogonally projected on the sub-edge. The positions of
+projected nodes are then used to set up a sub-mesh on this sub-edge.</p>
+
+<p>Offset edges can be published by the user to check their orientation.</p>
+
+<h3 id="definition">Definition &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">def MakeVirtualOffsetEdgeSubmeshes( thick_and_size, group_and_mesh = [None], np = 40, curv = True, rev = False, add = True, infa = False, dim = -1 ):</p>
+
+ 
+
+<p><img alt="picture" src = "../pictures/makevirtualoffsetedgesubmesh_1.png"/></p>
+
+<h3 id="arguments">Argument(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>GUI selection <span class="info"><a href="use.html#selection">[?]</a></span></th>
+<th>Selection by name <span class="info"><a href="use.html#name">[?]</a></span></th>
+<th>Recursive <span class="info"><a href="use.html#recursivefunctions">[?]</a></span></th>
+<th>Default value</th>
+</tr>
+
+<tr>
+<td><em>thick_and_size</em></td>
+<td>The desired viscous layer thickness and the desired cell size along the edge.</td>
+<td><strong>List</strong> of 2 <strong>Floats</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><em>group_and_mesh</em></td>
+<td>The input group and the mesh in which to create sub-meshes.</td>
+<td><strong>List</strong> of<br/>1 <strong>Group</strong> of <strong>Edges</strong> + <br/>1 <strong>Mesh</strong></td>
+<td>yes</td>
+<td>yes</td>
+<td>-</td>
+<td>[None]</td>
+</tr>
+
+<tr>
+<td><em>np</em></td>
+<td>See <a href="commonarguments.html#np">here</a>.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>40</td>
+</tr>
+
+<tr>
+<td><em>curv</em></td>
+<td>See <a href="commonarguments.html#curv">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>rev</em></td>
+<td>See <a href="commonarguments.html#rev">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td><em>add</em></td>
+<td>See <a href="commonarguments.html#add">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>True</td>
+</tr>
+
+<tr>
+<td><em>infa</em></td>
+<td>See <a href="commonarguments.html#infa">here</a>.</td>
+<td><strong>Boolean</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>False</td>
+</tr>
+
+<tr>
+<td><em>dim</em></td>
+<td>See <a href="commonarguments.html#dim">here</a>.</td>
+<td><strong>Integer</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-1</td>
+</tr>
+
+</table>
+
+<h3 id="returned_values">Returned Value(s) &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<table class="arguments">
+
+<tr>
+<th>dim Value <span class="info"><a href="commonarguments.html#dim">[?]</a></span></th>
+<th>single Value <span class="info"><a href="commonarguments.html#single">[?]</a></span></th>
+<th>Type</th>
+<th>Number</th>
+<th>Name</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>-</td>
+<td><strong>Compound</strong> of <strong>Edges</strong></td>
+<td>1</td>
+<td><em>"VirtualOffset"</em></td>
+</tr>
+
+<tr>
+<td>-1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+</table>
+
+<h3 id="example">Example &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+ 
+
+<p class="code">
+from cfdmsh import * <strong># To adapt to the <a href = "use.html#import">cfdmsh installation method</a></strong><br/>
+<br/>
+vertex1 = geompy.MakeVertex(0, 0.1, 0)<br/>
+vertex2 = geompy.MakeVertex(-0.1, 0, 0)<br/>
+vertex3 = geompy.MakeVertex(0, -0.1, 0)<br/>
+vertex4 = geompy.MakeVertex(1, 0, 0)<br/>
+<br/>
+arc = geompy.MakeArc(vertex1, vertex2, vertex3)<br/>
+edge1 = geompy.MakeEdge(vertex1, vertex4)<br/>
+edge2 = geompy.MakeEdge(vertex3, vertex4)<br/>
+foil = geompy.MakeWire([arc, edge1, edge2])<br/>
+foil = MakeFoilTrailingFillets(1e-3, foil, add = False)<br/>
+<br/>
+circle = geompy.MakeCircleR(3)<br/>
+domain = geompy.MakeFaceWires([foil, circle], isPlanarWanted = True)<br/>
+AddToStudy(domain, "domain")<br/>
+<br/>
+group = geompy.GetInPlace(domain, foil)<br/>
+AddToStudy(group, "group", father = domain)<br/>
+<br/>
+mesh = smesh.Mesh(domain)<br/>
+algo = mesh.Triangle(algo = smeshBuilder.NETGEN_1D2D)<br/>
+hypo = algo.Parameters()<br/>
+hypo.SetMaxSize(30)<br/>
+hypo = algo.ViscousLayers2D(0.05, 12, 1.2, group.GetSubShapeIndices(), isEdgesToIgnore = False)<br/>
+<br/>
+<em>virtual_offset = MakeVirtualOffsetEdgeSubmeshes([0.05, 0.05], [group, mesh], dim = 1)</em><br/>
+<em>MakeVirtualOffsetEdgeSubmeshes([0.05, 0.05], [group, mesh])</em><br/>
+mesh.Compute()<br/>
+</p>
+
+ 
+
+<h3 id="conditions_of_use">Conditions of Use &nbsp;&nbsp;<a href="#"><img alt="picture" src="../pictures/up.png"/></a></h3>
+
+<p>-</p>
+
+<p><a href="importcsvfile.html"><img alt="picture" src="../pictures/left.png"/> </a> &nbsp;&nbsp; <a href="maketriedgefacesubmeshes.html"><img alt="picture" src="../pictures/right.png"/></a></p>
+
+<p><a href="cfdmshfunctions.html"><img alt="picture" src="../pictures/back.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html"><img alt="picture" src="../pictures/home.png"></a>&nbsp;&nbsp;&nbsp;<strong>cfdmsh 4.0 documentation</strong></p>
+
+<p class="license"><a href="http://tougeron-cfd.com/">tougeron-cfd.com</a> © 2016</p>
+
+	</body>
+	
+</html>
